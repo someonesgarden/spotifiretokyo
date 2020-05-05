@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { connect } from 'react-redux';
 
 import './App.css';
-
 import Header from './components/spotify/Header';
 import Footer from './components/spotify/Footer';
 import UserPlaylists from './components/spotify/UserPlaylists';
@@ -12,9 +10,7 @@ import MainView from './components/spotify/MainView';
 import ArtWork from './components/spotify/ArtWork';
 import MainHeader from './components/spotify/MainHeader';
 import SideMenu from './components/spotify/SideMenu';
-
 import {ActionType} from './redux/spotify/index';
-
 
 
 class App extends Component {
@@ -22,25 +18,23 @@ class App extends Component {
 	static audio;
 
 	componentDidMount() {
+		let hashParams = {};
+		let e, r = /([^&;=]+)=?([^&;]*)/g,
+			q = window.location.hash.substring(1);
+		while (e = r.exec(q)) {
+			hashParams[e[1]] = decodeURIComponent(e[2]);
+		}
 
-	  let hashParams = {};
-	  let e, r = /([^&;=]+)=?([^&;]*)/g,
-	    q = window.location.hash.substring(1);
-	  while ( e = r.exec(q)) {
-	    hashParams[e[1]] = decodeURIComponent(e[2]);
-	  }
-
-	  if(!hashParams.access_token) {
-	  	let url = "https://accounts.spotify.com/authorize";
-	  	url = url+"?client_id="+window.clientId;
-	  	url = url+"&scope="+window.scopes;
-	  	url = url+"&response_type=token";
-	  	url = url+"&redirect_uri="+window.redirectUri;
-	  	window.location.href = url;
-	  } else {
-	    this.props.setToken(hashParams.access_token);
-	  }
-
+		if (!hashParams.access_token) {
+			let url = "https://accounts.spotify.com/authorize";
+			url = url + "?client_id=" + window.clientId;
+			url = url + "&scope=" + window.scopes;
+			url = url + "&response_type=token";
+			url = url + "&redirect_uri=" + window.redirectUri;
+			window.location.href = url;
+		} else {
+			this.props.setToken(hashParams.access_token);
+		}
 	}
 
 	componentWillReceiveProps(nextProps) {
