@@ -1,1 +1,23 @@
-# Created by .ignore support plugin (hsz.mobi)
+
+/.idea
+/secret_readme.md
+/startup-script.sh
+
+### API-SERVER
+/api-server/node_modules
+/api-server/keys.js
+/api-server/public/dict
+
+### CLIENT
+/client/node_modules
+/client/build
+
+/client/.DS_Store
+/client/.env.local
+/client/.env.development.local
+/client/.env.test.local
+/client/.env.production.local
+
+/client/npm-debug.log*
+/client/yarn-debug.log*
+/client/yarn-error.log*
