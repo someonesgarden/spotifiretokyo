@@ -7,6 +7,7 @@
 /api-server/node_modules
 /api-server/keys.js
 /api-server/public/dict
+/api-server/public/static
 
 ### CLIENT
 /client/node_modules
