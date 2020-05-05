@@ -92,3 +92,9 @@ export NVM_DIR="$HOME/.nvm"
 foreverなどのコマンドがちゃんと動くように設計すること！
 
  
+
+### 起動時
+
+clientフォルダ内で
+npm run buildを行うことでapi-server/public/staticというフォルダが作成される。
+サイトの動作に必要。
