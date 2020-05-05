@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './AlbumList.css';
+import './AlbumList.scss';
 
 const AlbumList = ({ songs, audioControl }) => {
 
