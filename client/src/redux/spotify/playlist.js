@@ -10,6 +10,8 @@ const ActionType = {
   FETCH_PLAYLIST_SONGS_PENDING:'FETCH_PLAYLIST_SONGS_PENDING',
   FETCH_PLAYLIST_SONGS_SUCCESS:'FETCH_PLAYLIST_SONGS_SUCCESS',
   FETCH_PLAYLIST_SONGS_ERROR:'FETCH_PLAYLIST_SONGS_ERROR',
+
+  ASN_FAILED_LOGONLY:'ASN_FAILED_LOGONLY',
 };
 
 const store = {
@@ -19,6 +21,12 @@ const store = {
 
 
 const reducer = {
+
+  [ActionType.ASN_FAILED_LOGONLY]:(payload)=>{
+    console.log("ASN_FAILED_LOGONLY",payload);
+    return store;
+  },
+
   [ActionType.FETCH_PLAYLIST_MENU_PENDING]: (payload) => {
 
     store.fetchPlaylistPending = true;

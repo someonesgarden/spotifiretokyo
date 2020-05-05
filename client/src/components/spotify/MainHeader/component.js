@@ -44,11 +44,7 @@ const MainHeader = ({
             <p className='playlist-text'>PLAYLIST</p>
             <h3 className='header-title'>{headerTitle}</h3>
             <p className='created-by'>Created By: <span className='lighter-text'>{currentPlaylist.owner.display_name}</span> - {currentPlaylist.tracks.total} songs</p>
-            <button
-              onClick={!songPaused ? pauseSong : resumeSong}
-              className='main-pause-play-btn'>
-              {songPaused ? 'PLAY' : 'PAUSE'}
-            </button>
+
 
           </div>
         </div>
@@ -63,11 +59,6 @@ const MainHeader = ({
               <h3>{currentArtist.name}</h3>
             </div>
           </div>
-          <button
-            onClick={!songPaused ? pauseSong : resumeSong}
-            className='main-pause-play-btn artist-button'>
-            {songPaused ? 'PLAY' : 'PAUSE'}
-          </button>
         </div>
       )}
 
@@ -78,13 +69,6 @@ const MainHeader = ({
 				headerTitle === 'Artists') && (
           <div>
             <h3 className='header-title'>{headerTitle}</h3>
-            {headerTitle !== 'Artists' && (
-              <button
-                onClick={!songPaused ? pauseSong : resumeSong}
-                className='main-pause-play-btn'>
-                {songPaused ? 'PLAY' : 'PAUSE'}
-              </button>
-            )}
 
           </div>
         )}

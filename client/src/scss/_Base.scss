@@ -6,8 +6,8 @@ body, p, h1, h2, h3 {
 
 body {
   font-family: 'Proxima Nova', Georgia, sans-serif;
-  background: rgb(0, 0, 0);
-  color: #fff;
+  background: $body-bg;
+  color: $primary-dark;
   max-width: 1400px;
   margin: 0 auto;
   padding: 0;
@@ -28,7 +28,7 @@ body {
 }
 
 .main-section {
-  width: 900px;
+  width: calc(100% - 250px);
   position: relative;
   left: 200px;
   padding: 0 10px;

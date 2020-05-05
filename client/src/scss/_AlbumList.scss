@@ -42,7 +42,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: #ccc;
+      color: #202020;
       cursor: pointer;
       -webkit-text-stroke: 6px rgb(24, 24, 24);
       z-index: -1;
@@ -58,7 +58,7 @@
   line-height: 22px;
 
   .artist-name {
-    color: rgb(179, 179, 179);
+    color: rgb(37, 37, 37);
     font-family: 'Proxima Thin', Georgia, sans-serif;
   }
 }

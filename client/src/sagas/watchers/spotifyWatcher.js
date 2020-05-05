@@ -94,9 +94,8 @@ function* fetchPlaylistSongs(action){
     const result = yield axios.get(`https://api.spotify.com/v1/users/${action.value.userId}/playlists/${action.value.playlistId}/tracks`,
         {headers: {'Authorization': 'Bearer ' + action.value.accessToken}}).then(res => {
         //remove duplicate tracks
-        res.items = uniqBy(res.data.items, (item) => {
-            return item.track.id;
-        });
+        let items = res.data.items.filter((item)=> item.track && item.track.id);
+        res.items = uniqBy(items, (item) => item.track.id);
         return res;
     });
 

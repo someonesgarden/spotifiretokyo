@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment/moment';
+import Button from "@material-ui/core/Button";
 
 class SongList extends Component {
 
@@ -22,46 +23,28 @@ class SongList extends Component {
 
       return (
         <li className={song.track.id === this.props.songId ? 'active user-song-item' : 'user-song-item'} key={ i }>
+
           <div onClick={() => {(song.track.id === this.props.songId) && this.props.songPlaying && this.props.songPaused ? this.props.resumeSong() :
             this.props.songPlaying && !this.props.songPaused && (song.track.id === this.props.songId)  ? this.props.pauseSong() :
               this.props.audioControl(song); } } className='play-song'>
             <i className={`fa ${buttonClass} play-btn`} aria-hidden="true"/>
           </div>
 
-          {this.props.viewType !== 'songs' && (
-            <p className='add-song' onClick={() => {this.props.addSongToLibrary(this.props.token, song.track.id);}}>
-              {this.props.songAddedId === song.track.id ?
-                (<i className="fa fa-check add-song" aria-hidden="true" />) :
-                (<i className="fa fa-plus add-song" aria-hidden="true" />)
-              }
-            </p>
-          )}
-
-          {this.props.viewType == 'songs' && (
-            <p className='add-song'>
-              <i className="fa fa-check" aria-hidden="true"/>
-            </p>
-          )}
-
           <div className='song-title'>
-            <p>{ song.track.name }</p>
+            <p className='title'>{ song.track.name }</p>
+            <p className='album'>from "{ song.track.album.name }"</p>
+            <p className='artist'>by { song.track.artists[0].name }</p>
+            <p className='song-added'>{ moment(song.added_at).format('YYYY/MM/DD')}</p>
+            <p className='song-length'>{ this.msToMinutesAndSeconds(song.track.duration_ms) }</p>
           </div>
 
-          <div className='song-artist'>
-            <p>{ song.track.artists[0].name }</p>
+          <div className="lyrics">
+            <Button variant="outlined" color="primary" size="small">MusicBrainz</Button>
+            <Button variant="outlined" color="secondary" size="small">MusixMatch</Button>
+            <Button variant="contained" color="primary" size="small">KGet</Button>
+            <Button variant="contained" color="secondary" size="small">Genius</Button>
           </div>
 
-          <div className='song-album'>
-            <p>{ song.track.album.name }</p>
-          </div>
-
-          <div className='song-added'>
-            <p>{ moment(song.added_at).format('YYYY-MM-DD')}</p>
-          </div>
-
-          <div className='song-length'>
-            <p>{ this.msToMinutesAndSeconds(song.track.duration_ms) }</p>
-          </div>
         </li>
       );
     });
@@ -73,20 +56,8 @@ class SongList extends Component {
       <div>
         <div className='song-header-container'>
           <div className='song-title-header'>
-            <p>Title</p>
           </div>
-          <div className='song-artist-header'>
-            <p>Artist</p>
-          </div>
-          <div className='song-album-header'>
-            <p>Album</p>
-          </div>
-          <div className='song-added-header'>
-            <i className="fa fa-calendar-plus-o" aria-hidden="true"/>
-          </div>
-          <div className='song-length-header'>
-            <p><i className="fa fa-clock-o" aria-hidden="true" /></p>
-          </div>
+
         </div>
         {
           this.props.songs && !this.props.fetchSongsPending && !this.props.fetchPlaylistSongsPending && this.renderSongs()

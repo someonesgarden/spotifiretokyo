@@ -11,7 +11,7 @@
 
   .artist-name {
     font-family: 'Proxima Thin', Georgia, sans-serif;
-    color: #aaa;
+    color: #c92c83;
     font-size: 12px;
   }
 }
@@ -24,7 +24,7 @@
 
 .forward, .reverse, .play-btn {
   padding: 0 5px;
-  color: rgb(179, 179, 179);
+  color: rgb(238, 238, 238);
   cursor: pointer;
 }
 
@@ -48,7 +48,7 @@
 }
 
 .play-btn .fa {
-  -webkit-text-stroke: 4px rgb(40, 40, 40);
+ // -webkit-text-stroke: 4px rgb(40, 40, 40);
 }
 
 .song-progress-container {
@@ -68,7 +68,7 @@
   margin: 0;
   width: 100px;
   height: 4px;
-  background: #1db954;
+  background: #bcf0c2;
   border-radius: 4px;
 }
 

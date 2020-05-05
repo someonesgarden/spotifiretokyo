@@ -1,9 +1,15 @@
-import {all} from 'redux-saga/effects';
+import {all, put} from 'redux-saga/effects';
 
 import spotifyWatcher from './watchers/spotifyWatcher';
 
 export default function* rootSaga() {
-    yield all([
-        spotifyWatcher()
-    ]);
+
+    try {
+        yield all([
+            spotifyWatcher()
+        ]);
+    } catch (error) {
+        yield put({type:'ASN_FAILED_LOGONLY', value:error})
+    }
+
 }
