@@ -6,25 +6,23 @@ GCPサーバー側は、
 https://www.spotifire.tokyo/musixmatch/track/trackLyrics?trackid=14566222
 
 
-## VMインスタンスを作成する
-centosかubuntu以外はうまくSSHコネクションができないので作成の際は要注意。
+### VMインスタンスを作成する
+centosかubuntu以外はうまくSSHコネクションができないので作成の際は注意
 
-## お名前などでドメイン名取得
-
-## VPCから静的IPアドレスを予約するー＞課金されてるのでプロジェクト終了後開放が必要
+### お名前などでドメイン名取得
+VPCから静的IPアドレスを予約
 
 
 ## Cloud DNSでゾーンを作成
 spotifire.tokyoを使用
 AレコードにVMインスタンスの外部IPを設定
 
-## SSHでVMインスタンスを開く
-### VMインスタンスを作成した後は、GCE × CentOS 7 × nginx × Let's Encrypt(certbot) × Node.js × Git
+### SSHでVMインスタンスを開く
+#### VMインスタンスを作成した後は、GCE × CentOS 7 × nginx × Let's Encrypt(certbot) × Node.js × Git
 https://qiita.com/smilemonster/items/9e1120d4d119d7159515
 cd /etc/selinux/
 sudo cp config config_back_up
 sudo vi config
-
 
 
 ### NGINXインストール
@@ -37,12 +35,12 @@ http://外部IP (httpsで接続してもつながらない！）
 sudo systemctl enable nginx
 sudo systemctl start nginx
 
-## レポジトリにプロジェクトデータを追加
-### ローカルにクローンを作成の場合
+### レポジトリにプロジェクトデータを追加
+#### ローカルにクローンを作成の場合
 git clone ssh://d@someonesgarden.org@source.developers.google.com:2022/p/spotifirework/r/api_server
 
 
-## node.jsをポート80番でNginx上で起動させる
+### node.jsをポート80番でNginx上で起動させる
 https://qiita.com/yoshi3/items/9349f8bfd3688a3cab43
 
 このとき、httpsをhttpに転送する命令を既に書いちゃっているので、それに対応するために、
