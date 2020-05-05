@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import './App.css';
+import './scss/App.scss';
 import Header from './components/spotify/Header';
 import Footer from './components/spotify/Footer';
 import UserPlaylists from './components/spotify/UserPlaylists';
