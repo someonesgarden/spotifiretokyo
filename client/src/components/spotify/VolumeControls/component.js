@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './VolumeControls.css';
 
 class VolumeControls extends Component {
 
   constructor(props) {
-    
+
     super(props);
     this.state = {
       volume: props.volume
     };
-    
+
   }
 
 	updateVolume = (e) => {
@@ -31,7 +30,7 @@ class VolumeControls extends Component {
 	      <input className='volume' type="range" min={0} max={100} value={this.state.volume} onChange={this.updateVolume} />
 	    </div>
 	  );
-    
+
 	}
 }
 
