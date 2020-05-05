@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './ArtWork.css';
 
 const ArtWork = (albumArtwork) => {
   return (

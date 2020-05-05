@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './ArtistList.css';
 
 const ArtistList = ({ artists, fetchArtistSongs, token, updateHeaderTitle }) => {
 

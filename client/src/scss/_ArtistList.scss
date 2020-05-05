@@ -17,23 +17,23 @@
   width: 180px;
   cursor: pointer;
   text-align: center;
-}
 
-.artist-item a {
-  text-decoration: none;
-  color: #fff;
-}
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
 
-.artist-item img {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
+  img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+  }
 }
 
 .artist-image img {
   opacity: 1;
-}
 
-.artist-image img:hover {
-  opacity: 0.4;
+  &:hover {
+    opacity: 0.4;
+  }
 }
