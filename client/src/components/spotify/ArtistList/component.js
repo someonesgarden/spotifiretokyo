@@ -1,18 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const ArtistList = ({ artists, fetchArtistSongs, token, updateHeaderTitle }) => {
+const ArtistList = ({ artists, fetchArtistSongs, access_token, updateHeaderTitle }) => {
 
   const renderArtists = () => {
     return artists.map((artist, i) => {
 
-      const artistSongsAction = (artist, token) => {
-        fetchArtistSongs(artist.id, token);
+      const artistSongsAction = (artist, access_token) => {
+        fetchArtistSongs(artist.id, access_token);
         updateHeaderTitle(artist.name);
       };
 
       return (
-        <li onClick={() => {artistSongsAction(artist, token); } } className='artist-item' key={ i }>
+        <li onClick={() => {artistSongsAction(artist, access_token); } } className='artist-item' key={ i }>
           <a>
             <div>
               <div className='artist-image'>
@@ -36,16 +35,6 @@ const ArtistList = ({ artists, fetchArtistSongs, token, updateHeaderTitle }) => 
     </ul>
   );
 
-};
-
-ArtistList.propTypes = {
-  artists: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
-  fetchArtistSongs: PropTypes.func,
-  token: PropTypes.string,
-  updateHeaderTitle: PropTypes.func
 };
 
 export default ArtistList;

@@ -1,5 +1,4 @@
 import React from 'react';
-import TrackSearch from '../TrackSearch';
 
 const Header = () => {
   return(

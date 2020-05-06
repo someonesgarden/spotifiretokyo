@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import auth from './utils/spotify/auth';
 
 import './App.scss';
 import Header from './components/spotify/Header';
@@ -18,13 +19,25 @@ class App extends Component {
 	static audio;
 
 	componentDidMount() {
-		let hashParams = {};
-		let e, r = /([^&;=]+)=?([^&;]*)/g,
-			q = window.location.hash.substring(1);
-		while (e = r.exec(q)) {
-			hashParams[e[1]] = decodeURIComponent(e[2]);
-		}
+		this._prepare_before_auth();
+	}
 
+	componentWillReceiveProps(nextProps, nextContext) {
+	  if(nextProps.access_token) {
+	    this.props.fetchUser(nextProps.access_token);
+	  }
+
+	  if(this.audio !== undefined) {
+	    this.audio.volume = nextProps.volume / 100;
+	  }
+	}
+
+
+	_prepare_before_auth(){
+
+		const {setTokens} = this.props;
+
+		let hashParams = auth.c_webHash();
 		if (!hashParams.access_token) {
 			let url = "https://accounts.spotify.com/authorize";
 			url = url + "?client_id=" + window.clientId;
@@ -33,20 +46,10 @@ class App extends Component {
 			url = url + "&redirect_uri=" + window.redirectUri;
 			window.location.href = url;
 		} else {
-			this.props.setToken(hashParams.access_token);
+			setTokens(hashParams);
 		}
 	}
 
-	componentWillReceiveProps(nextProps) {
-	  if(nextProps.token) {
-	    this.props.fetchUser(nextProps.token);
-	  };
-
-	  if(this.audio !== undefined) {
-	    this.audio.volume = nextProps.volume / 100;
-	  }
-
-	}
 
 	stopSong = () => {
 	  if(this.audio) {
@@ -125,21 +128,11 @@ class App extends Component {
 	}
 }
 
-App.propTypes = {
-  token: PropTypes.string,
-  fetchUser: PropTypes.func,
-  setToken: PropTypes.func,
-  pauseSong: PropTypes.func,
-  playSong: PropTypes.func,
-  stopSong: PropTypes.func,
-  resumeSong: PropTypes.func,
-  volume: PropTypes.number
-};
 
 const mapStateToProps = (state) => {
 
   return {
-    token: state.tokenReducer.token,
+    access_token: state.tokenReducer.access_token,
     volume: state.soundReducer.volume
   };
 
@@ -147,6 +140,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => ({
 	setToken:  (data)=> dispatch({type:ActionType.SET_TOKEN,value:data}),
+	setTokens: (data)=> dispatch({type:ActionType.SET_AUTHORIZATION,value:data}),
 	fetchUser: (data)=> dispatch({type:ActionType.SAGA_FETCH_USER, value:data}),
 	playSong:  (data)=> dispatch({type:ActionType.PLAY_SONG, value:data}),
 	stopSong:  () => dispatch({type:ActionType.STOP_SONG}),

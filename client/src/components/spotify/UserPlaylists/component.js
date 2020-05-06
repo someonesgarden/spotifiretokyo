@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 class UserPlaylists extends Component {
 
   componentWillReceiveProps (nextProps) {
-    if(nextProps.userId !== '' && nextProps.token !== '' && nextProps.playlistMenu.length===0) {
+    if(nextProps.userId !== '' && nextProps.access_token !== '' && nextProps.playlistMenu.length===0) {
       console.log("nextProps", nextProps);
-      this.props.fetchPlaylistsMenu(nextProps.userId, nextProps.token);
+      this.props.fetchPlaylistsMenu(nextProps.userId, nextProps.access_token);
     }
   }
 
   renderPlaylists() {
     return this.props.playlistMenu.map(playlist => {
       const getPlaylistSongs = () => {
-        this.props.fetchPlaylistSongs(playlist.owner.id, playlist.id, this.props.token);
+        this.props.fetchPlaylistSongs(playlist.owner.id, playlist.id, this.props.access_token);
         this.props.updateHeaderTitle(playlist.name);
       };
 
@@ -40,17 +39,5 @@ class UserPlaylists extends Component {
   }
 }
 
-UserPlaylists.propTypes = {
-  userId: PropTypes.string,
-  token: PropTypes.string,
-  title: PropTypes.string,
-  playlistMenu:  PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
-  fetchPlaylistsMenu: PropTypes.func,
-  fetchPlaylistSongs: PropTypes.func,
-  updateHeaderTitle: PropTypes.func
-};
 
 export default UserPlaylists;

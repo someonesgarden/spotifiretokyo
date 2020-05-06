@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import moment from 'moment/moment';
 import Button from "@material-ui/core/Button";
 
 class SongList extends Component {
 
   componentWillReceiveProps (nextProps) {
-    if(nextProps.token !== '' && !nextProps.fetchSongsError && nextProps.fetchSongsPending && nextProps.viewType === 'songs') {
-      this.props.fetchSongs(nextProps.token);
+    if(nextProps.access_token !== '' && !nextProps.fetchSongsError && nextProps.fetchSongsPending && nextProps.viewType === 'songs') {
+      this.props.fetchSongs(nextProps.access_token);
     }
   }
 
@@ -68,28 +67,5 @@ class SongList extends Component {
   }
 }
 
-SongList.propTypes = {
-  viewType: PropTypes.string,
-  token: PropTypes.string,
-  songAddedId: PropTypes.string,
-  songId: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
-  songs: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
-  fetchSongsError: PropTypes.bool,
-  fetchSongsPending: PropTypes.bool,
-  fetchPlaylistSongsPending: PropTypes.bool,
-  fetchSongs: PropTypes.func,
-  audioControl: PropTypes.func,
-  songPaused: PropTypes.bool,
-  songPlaying: PropTypes.bool,
-  resumeSong: PropTypes.func,
-  pauseSong: PropTypes.func,
-  addSongToLibrary: PropTypes.func,
-};
 
 export default SongList;

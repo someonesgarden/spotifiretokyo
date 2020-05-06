@@ -6,7 +6,7 @@ const mapStateToProps = (state) => {
 	return {
 		userId: state.userReducer.user ? state.userReducer.user.id : '',
 		playlistMenu: state.playlistReducer.playlistMenu ? state.playlistReducer.playlistMenu : '',
-		token: state.tokenReducer.token ? state.tokenReducer.token : '',
+		access_token: state.tokenReducer.access_token ? state.tokenReducer.access_token : '',
 		title: state.uiReducer.title
 	};
 };

@@ -10,7 +10,7 @@ const SideMenu = ({
   fetchSongs,
   fetchAlbums,
   fetchArtists,
-  token,
+  access_token,
   title,
   artistIds
 }) => {
@@ -24,7 +24,7 @@ const SideMenu = ({
   const handleBrowseClick = ()  => {
     updateHeaderTitle('Browse');
     updateViewType('Featured');
-    fetchFeatured(token);
+    fetchFeatured(access_token);
   };
 
   const renderSideMenu = () => {
@@ -53,7 +53,7 @@ const SideMenu = ({
         <li key={ item.name }
           className={title === item.name ? 'active side-menu-item': 'side-menu-item'}
           onClick={() => {
-            item.getArtists ? item.action(token, artistIds) : item.action(token);
+            item.getArtists ? item.action(access_token, artistIds) : item.action(access_token);
             handleClick(item.name); }
           }>
           { item.name }
@@ -78,17 +78,5 @@ const SideMenu = ({
 
 };
 
-SideMenu.propTypes = {
-  updateHeaderTitle: PropTypes.func,
-  updateViewType: PropTypes.func,
-  fetchFeatured: PropTypes.func,
-  fetchRecentlyPlayed: PropTypes.func,
-  fetchSongs: PropTypes.func,
-  fetchAlbums: PropTypes.func,
-  fetchArtists: PropTypes.func,
-  token: PropTypes.string,
-  artistIds: PropTypes.string,
-  title: PropTypes.string
-};
 
 export default SideMenu;

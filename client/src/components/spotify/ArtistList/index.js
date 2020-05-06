@@ -5,7 +5,7 @@ import {ActionType} from '../../../redux/spotify';
 const mapStateToProps = (state) => {
 
   return {
-    token: state.tokenReducer.token ? state.tokenReducer.token : '',
+    access_token: state.tokenReducer.access_token ? state.tokenReducer.access_token : '',
     artists: state.artistsReducer.artistList ? state.artistsReducer.artistList.artists : ''
   };
 

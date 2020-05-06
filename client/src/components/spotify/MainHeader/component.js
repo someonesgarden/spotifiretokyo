@@ -85,24 +85,7 @@ const MainHeader = ({
     </div>
 
   );
-
 };
 
-MainHeader.propTypes = {
-  pauseSong: PropTypes.func,
-  resumeSong: PropTypes.func,
-  fetchCategories: PropTypes.func,
-  fetchNewReleases: PropTypes.func,
-  fetchFeatured: PropTypes.func,
-  updateHeaderTitle: PropTypes.func,
-  updateViewType: PropTypes.func,
-  songPaused: PropTypes.bool,
-  headerTitle: PropTypes.string,
-  viewType: PropTypes.string,
-  playlists: PropTypes.array,
-  playlistMenu: PropTypes.array,
-  token: PropTypes.string,
-  artists: PropTypes.array,
-};
 
 export default MainHeader;
