@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const MainHeader = ({
   pauseSong,
@@ -13,7 +12,7 @@ const MainHeader = ({
   headerTitle,
   viewType,
   playlists,
-  token,
+  access_token,
   artists
 }) => {
 
@@ -76,9 +75,9 @@ const MainHeader = ({
         <div>
           <h3 className='header-title'>{headerTitle}</h3>
           <div className='browse-headers'>
-            <p className={viewType === 'Genres' ? 'active' : ''} onClick={() => { fetchCategories(token); updateViewType('Genres'); updateHeaderTitle('Browse'); }}>Genres</p>
-            <p className={viewType === 'New Releases' ? 'active' : ''} onClick={() => { fetchNewReleases(token); updateViewType('New Releases'); updateHeaderTitle('Browse'); }}>New Releases</p>
-            <p className={viewType === 'Featured' ? 'active' : ''} onClick={() => { fetchFeatured(token); updateViewType('Featured'); updateHeaderTitle('Browse'); }}>Featured</p>
+            <p className={viewType === 'Genres' ? 'active' : ''} onClick={() => { fetchCategories(access_token); updateViewType('Genres'); updateHeaderTitle('Browse'); }}>Genres</p>
+            <p className={viewType === 'New Releases' ? 'active' : ''} onClick={() => { fetchNewReleases(access_token); updateViewType('New Releases'); updateHeaderTitle('Browse'); }}>New Releases</p>
+            <p className={viewType === 'Featured' ? 'active' : ''} onClick={() => { fetchFeatured(access_token); updateViewType('Featured'); updateHeaderTitle('Browse'); }}>Featured</p>
           </div>
         </div>
       )}

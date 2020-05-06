@@ -20,28 +20,31 @@ const reducer = {
 
   [ActionType.SET_AUTHORIZATION]: (payload) => {
 
-    if(payload.value.authorized){
-      store.authorized = payload.value.authorized;
+    if(!!payload.value){
+      if(payload.value.authorized){
+        store.authorized = payload.value.authorized;
+      }
+
+      if(payload.value.me){
+        store.me = payload.value.me;
+        localStorage.setItem('me', store.me);
+      }
+
+      if(payload.value.access_token){
+        store.access_token = payload.value.access_token;
+        localStorage.setItem('access_token', store.access_token);
+      }
+      if(payload.value.refresh_token){
+        store.refresh_token = payload.value.refresh_token;
+        localStorage.setItem('refresh_token', store.refresh_token);
+      }
+      if(payload.value.expires_in){
+        store.expires_in = payload.value.expires_in;
+        localStorage.setItem('expires_in', store.expires_in);
+      }
     }
 
-    if(payload.value.me){
-      store.me = payload.value.me;
-      sessionStorage.setItem('me', store.me);
-    }
 
-    if(payload.value.access_token){
-
-      store.access_token = payload.value.access_token;
-      sessionStorage.setItem('access_token', store.access_token);
-    }
-    if(payload.value.refresh_token){
-      store.refresh_token = payload.value.refresh_token;
-      sessionStorage.setItem('refresh_token', store.refresh_token);
-    }
-    if(payload.value.expires_in){
-      store.expires_in = payload.value.expires_in;
-      sessionStorage.setItem('expires_in', store.expires_in);
-    }
 
     return {
       ...payload.state.tokenReducer,
@@ -50,13 +53,13 @@ const reducer = {
   },
 
   [ActionType.SET_TOKEN]:(payload) => {
-    const refresh_token = sessionStorage.getItem('refresh_token');
+    const refresh_token = localStorage.getItem('refresh_token');
 
     store.access_token = payload.value;
 
     if(refresh_token){
       store.refresh_token = refresh_token;
-      store.expires_in = sessionStorage.getItem('expires_in');
+      store.expires_in = localStorage.getItem('expires_in');
     }
 
     return {

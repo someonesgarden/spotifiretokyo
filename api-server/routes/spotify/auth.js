@@ -5,7 +5,7 @@ const SpotifyWebApi = require('spotify-web-api-node');
 let params = keys.spotifyParams;
 
 
-let setSpotifyApi = function(type='emory'){
+let setSpotifyApi = function(type){
     return new SpotifyWebApi({
         scope:params[type].scopes.join(' '),
         clientId: params[type].clientId,
@@ -14,12 +14,19 @@ let setSpotifyApi = function(type='emory'){
     });
 }
 
-// Client Credentials
+let getAuthorizeURL = function(type='emory') {
+    const spotifyApi = setSpotifyApi(type);
+    let state = '';
+    let length = 40;
+    let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (let i = 0; i < length; i++) {
+        state += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return spotifyApi.createAuthorizeURL(params[type].scopes, state);
+}
+
 router.get('/clientCredentialsGrant', (req,res)=>{
-
-    const spotifyApi = setSpotifyApi();
-
-    // one time granting
+    const spotifyApi = setSpotifyApi('emory');
       spotifyApi.clientCredentialsGrant().then(
         function(data) {
           let result = {
@@ -35,9 +42,22 @@ router.get('/clientCredentialsGrant', (req,res)=>{
     );
 });
 
-// Authorization Code
-router.get('/authorizationCodeGrant',(req,res)=>{
+router.get('/getAuthorizeURL', (req,res)=>{
+    let type = req.query.type || 'emory';
+    let authorizeURL = getAuthorizeURL(type);
+    res.send(authorizeURL);
+});
 
+router.get('/authorizationCode', (req,res)=>{
+    let type = req.query.type || 'emory';
+    let authorizeURL = getAuthorizeURL(type);
+    res.writeHead(302, {
+        'Location':authorizeURL
+    });
+    res.end();
+});
+
+router.get('/authorizationCodeGrant',(req,res)=>{
     let type = req.query.type || 'emory';
     const spotifyApi = setSpotifyApi(type);
 
@@ -61,55 +81,20 @@ router.get('/authorizationCodeGrant',(req,res)=>{
     );
 });
 
-router.get('/getAuthorizeURL', (req,res)=>{
-
-    let type = req.query.type || 'emory';
-    const spotifyApi = setSpotifyApi(type);
-
-    let state = '';
-    let length = 40;
-    let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (let i = 0; i < length; i++) {
-        state += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-
-    let authorizeURL = spotifyApi.createAuthorizeURL(params[type].scopes, state);
-    res.send(authorizeURL);
-});
-
-
-router.get('/sendAuthorizeURL', (req,res)=>{
-
-    let type = req.query.type || 'emory';
-
-    const spotifyApi = setSpotifyApi(type);
-
-    let state = '';
-    let length = 40;
-    let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (let i = 0; i < length; i++) {
-        state += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    let authorizeURL = spotifyApi.createAuthorizeURL(params[type].scopes, state);
-    res.writeHead(302, {
-        'Location':authorizeURL
-    });
-    res.end();
-});
-
 
 // Refresh Access Token
-router.post('/refreshAccessToken', (req,res)=>{
+router.get('/refreshAccessToken', (req,res)=>{
 
     let type = req.query.type || 'emory';
     const spotifyApi = setSpotifyApi(type);
-
-    spotifyApi.setAccessToken(req.body['access_token']);
-    spotifyApi.setRefreshToken(req.body['refresh_token']);
+    const refresh_token = req.query.refresh_token;
+    spotifyApi.setRefreshToken(refresh_token);
     spotifyApi.refreshAccessToken().then(
+
         function(data) {
             res.send({...data.body, refresh_token: req.body['refresh_token']});
         },
+
         function(err) {
             console.log('Could not refresh the token!', err.message);
             res.redirect('/sendAuthorizeURL');
@@ -117,6 +102,28 @@ router.post('/refreshAccessToken', (req,res)=>{
         }
     );
 });
+
+
+// Refresh Access Token
+// router.post('/refreshAccessToken', (req,res)=>{
+//
+//     let type = req.query.type || 'emory';
+//     const spotifyApi = setSpotifyApi(type);
+//
+//     spotifyApi.setAccessToken(req.body['access_token']);
+//     spotifyApi.setRefreshToken(req.body['refresh_token']);
+//     spotifyApi.refreshAccessToken().then(
+//         function(data) {
+//             res.send({...data.body, refresh_token: req.body['refresh_token']});
+//         },
+//         function(err) {
+//             console.log('Could not refresh the token!', err.message);
+//             res.redirect('/sendAuthorizeURL');
+//             res.send(null);
+//         }
+//     );
+// });
+
 
 
 module.exports = router;

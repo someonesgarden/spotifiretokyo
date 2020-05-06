@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const BrowseView = ({ view, viewType, token, fetchPlaylistSongs, updateHeaderTitle, addPlaylistItem }) => {
+const BrowseView = ({ view, viewType, access_token, fetchPlaylistSongs, updateHeaderTitle, addPlaylistItem }) => {
 
   let browseView;
 
@@ -11,7 +11,7 @@ const BrowseView = ({ view, viewType, token, fetchPlaylistSongs, updateHeaderTit
 
       const getPlaylistSongs = () => {
         addPlaylistItem(item);
-        fetchPlaylistSongs(item.owner.id, item.id, token);
+        fetchPlaylistSongs(item.owner.id, item.id, access_token);
         updateHeaderTitle(item.name);
       };
 

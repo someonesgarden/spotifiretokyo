@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
     viewType: state.songsReducer.viewType,
     playlists: state.playlistReducer.playlists,
     artists: state.artistsReducer.artistList ? state.artistsReducer.artistList.artists : [],
-    token: state.tokenReducer.token
+    access_token: state.tokenReducer.access_token
   };
 
 };
