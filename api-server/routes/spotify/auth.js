@@ -9,17 +9,15 @@ let setSpotifyApi = function(type,req=null){
 
     let mode = req.query.mode || null;
 
-    let redirectUri = params[type].redirectUri;
+    let redirectUri = !!mode && mode==='DEV' ? 'http://127.0.0.1:8080/callback' : params[type].redirectUri;
 
-    if(!!mode && mode==='DEV'){
-
-        redirectUri = 'http://127.0.0.1:8080/callback';
-
-    }else if(!!req){
-            const hostname = req.get('host');
-            const protocol = hostname.indexOf('localhost') !== -1 || hostname.indexOf('127.0.0.1') !== -1 ? 'http://' : 'https://';
-            redirectUri = protocol + hostname + '/callback';
-    }
+    // if(!!mode && mode==='DEV'){
+    //     redirectUri = 'http://127.0.0.1:8080/callback';
+    // }else if(!!req){
+    //         const hostname = req.get('host');
+    //         const protocol = hostname.indexOf('localhost') !== -1 || hostname.indexOf('127.0.0.1') !== -1 ? 'http://' : 'https://';
+    //         redirectUri = protocol + hostname + '/callback';
+    // }
 
 
     return new SpotifyWebApi({
@@ -30,7 +28,7 @@ let setSpotifyApi = function(type,req=null){
     });
 }
 
-let getAuthorizeURL = function(type='emory',req=null) {
+let getAuthorizeURL = function(type='emory',req) {
     const spotifyApi = setSpotifyApi(type,req);
     let state = '';
     let length = 40;
@@ -60,13 +58,13 @@ router.get('/clientCredentialsGrant', (req,res)=>{
 
 router.get('/getAuthorizeURL', (req,res)=>{
     let type = req.query.type || 'emory';
-    let authorizeURL = getAuthorizeURL(type);
+    let authorizeURL = getAuthorizeURL(type,req);
     res.send(authorizeURL);
 });
 
 router.get('/authorizationCode', (req,res)=>{
     let type = req.query.type || 'emory';
-    let authorizeURL = getAuthorizeURL(type);
+    let authorizeURL = getAuthorizeURL(type,req);
     res.writeHead(302, {
         'Location':authorizeURL
     });
