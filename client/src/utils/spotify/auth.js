@@ -2,6 +2,9 @@ import userStore from "../../redux/spotify/user";
 import tokenStore from "../../redux/spotify/token";
 import axios from 'axios';
 
+const BASE_URL = 'https://www.spotifire.tokyo'
+
+
 export default {
 
     c_implicitGrant:function(type='') {
@@ -20,20 +23,9 @@ export default {
             state += possible.charAt(Math.floor(Math.random() * possible.length));
         }
 
-        let base_url ='https://accounts.spotify.com/authorize'
-        const params = {
-            client_id:window.clientId,
-            response_type:"code",
-            redirect_uri:window.redirectUri,
-            scope:window.scopes,
-            state:state
-        };
 
+        window.location.href = `${BASE_URL}/spotify/auth/authorizationCode`
 
-        console.log("params",params);
-        //window.location.href = base_url+'?'+Object.keys(params).map(key=> key+'='+params[key]).join('&');
-
-        window.location.href ='/spotify/auth/authorizationCode'
     },
 
     // c_webHash(){
@@ -71,10 +63,8 @@ export default {
             callback(null, stored_token);
 
         }else if(!!stored_refresh_token && stored_refresh_token !=='undefined'){
-            console.log("case2");
             //refresh_tokenがある場合
-            axios.get(`/spotify/auth/refreshAccessToken?refresh_token=${stored_refresh_token}`).then(res => {
-                console.log("case2",res.data);
+            axios.get(`${BASE_URL}/spotify/auth/refreshAccessToken?refresh_token=${stored_refresh_token}`).then(res => {
                 localStorage.setItem('expires_in', res.data.expires_in);
                 localStorage.setItem('access_token', res.data.access_token);
                 callback(null, res.data.access_token);
@@ -85,12 +75,11 @@ export default {
 
         }else if(code){
             //codeがある場合
-            axios.get(`/spotify/auth/authorizationCodeGrant?code=${code}`).then(res => {
+            axios.get(`${BASE_URL}/spotify/auth/authorizationCodeGrant?code=${code}`).then(res => {
                 let data = res.data.body ? res.data.body : res.data;
                 localStorage.setItem('expires_in',   data.expires_in);
                 localStorage.setItem('access_token', data.access_token);
                 if(data.refresh_token) localStorage.setItem('refresh_token',data.refresh_token);
-
                 callback(null, data.access_token);
             }).catch(err=>{
                 //トークン取得に失敗した場合もう一度codeだけでトライする

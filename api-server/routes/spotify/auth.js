@@ -6,11 +6,16 @@ let params = keys.spotifyParams;
 
 
 let setSpotifyApi = function(type){
+
+    const hostname = location.href.hostname;
+    const protocol = hostname.indexOf('localhost') !== -1 || hostname.indexOf('127.0.0.1') !== -1 ? 'http://' : 'https://';
+    const redirectUri = protocol + hostname + '/callback';
+
     return new SpotifyWebApi({
         scope:params[type].scopes.join(' '),
         clientId: params[type].clientId,
         clientSecret:params[type].clientSecret,
-        redirectUri: params[type].redirectUri
+        redirectUri: redirectUri
     });
 }
 
