@@ -62,24 +62,17 @@ class App extends Component {
     }
 
     _failed() {
-        console.log("_failed")
-        this.setState({
-            mode: 'init'
-        })
+        this.setState({mode: 'error'})
     }
 
     static _code_success(code) {
         console.log("_code_success")
-
     }
 
     _token_success(access_token) {
         this.props.setToken(access_token)
-        console.log("_token_success")
         this._init()
-
     }
-
 
     _auth() {
         //this._implicitGrant();
@@ -100,11 +93,7 @@ class App extends Component {
     _init() {
         const {access_token} = this.props;
         console.log("_init");
-        this.setState({
-            mode: 'token'
-        });
-
-
+        this.setState({mode: 'token'});
     }
 
 
@@ -116,39 +105,6 @@ class App extends Component {
             console.log("hashParams", hashParams);
             this.props.setTokens(hashParams);
         }
-    }
-
-    _authorizationCode() {
-        let state = '';
-        let length = 40;
-        let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for (let i = 0; i < length; i++) {
-            state += possible.charAt(Math.floor(Math.random() * possible.length));
-        }
-
-        const params = {
-            client_id: window.clientId,
-            response_type: "code",
-            redirect_uri: window.redirectUri,
-            scope: window.scopes,
-            state: state
-        };
-
-        const headers = {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        };
-
-        axios.get('/spotify/auth/authorizationCode', {params: JSON.stringify(params)}, {headers: headers}).then(res => {
-            //callback(null, res.data.access_token);
-        }).catch(err => {
-            //トークン取得に失敗した場合もう一度codeだけでトライする
-            console.log("code:post" + err.message);
-            //callback(code,null);
-        });
-
     }
 
 
@@ -191,7 +147,6 @@ class App extends Component {
     }
 
     render() {
-
         const {mode} = this.state;
 
         return (
@@ -200,14 +155,20 @@ class App extends Component {
                     {
                         mode === 'init' && (
                             <div className="initial">
-                                <Button onClick={() => this._login()}
-                                        variant="contained" size="large" color="primary">Login</Button>
+                                <Button onClick={() => this._login()} variant="contained" size="large" color="secondary">Hello</Button>
+                            </div>
+                        )
+                    }
+                    {
+                        mode === 'error' && (
+                            <div className="login">
+                                <Button onClick={() => this._login()} variant="contained" size="large" color="primary">Login</Button>
                             </div>
                         )
                     }
 
                     {
-                        mode !== 'init' && (
+                        mode === 'token' && (
                             <React.Fragment>
                                 <div className='left-side-section'>
                                     <SideMenu/>

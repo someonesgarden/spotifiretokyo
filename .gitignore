@@ -10,6 +10,7 @@
 /api-server/public/static
 /api-server/package-lock.json
 
+
 ### CLIENT
 /client/public/index.html
 /client/node_modules
