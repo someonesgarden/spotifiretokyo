@@ -7,9 +7,9 @@ let params = keys.spotifyParams;
 
 let setSpotifyApi = function(type,req=null){
 
-    const mode = "DEV";
+    let mode = req.query.mode || null;
 
-    let redirectUri = mode==='DEV' ? 'http://127.0.0.1:8080/callback' : params[type].redirectUri;
+    let redirectUri = !!mode && mode==='DEV' ? 'http://127.0.0.1:8080/callback' : params[type].redirectUri;
 
     // if(!!mode && mode==='DEV'){
     //     redirectUri = 'http://127.0.0.1:8080/callback';
