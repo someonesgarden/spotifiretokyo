@@ -7,13 +7,20 @@ let params = keys.spotifyParams;
 
 let setSpotifyApi = function(type,req=null){
 
+    let mode = req.query.mode || null;
+
     let redirectUri = params[type].redirectUri;
 
-    if(req){
-        const hostname = req.get('host');
-        const protocol = hostname.indexOf('localhost') !== -1 || hostname.indexOf('127.0.0.1') !== -1 ? 'http://' : 'https://';
-        redirectUri = protocol + hostname + '/callback';
+    if(!!mode && mode==='DEV'){
+
+        redirectUri = 'http://127.0.0.1:8080/callback';
+
+    }else if(!!req){
+            const hostname = req.get('host');
+            const protocol = hostname.indexOf('localhost') !== -1 || hostname.indexOf('127.0.0.1') !== -1 ? 'http://' : 'https://';
+            redirectUri = protocol + hostname + '/callback';
     }
+
 
     return new SpotifyWebApi({
         scope:params[type].scopes.join(' '),

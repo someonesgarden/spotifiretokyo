@@ -64,7 +64,7 @@ export default {
 
         }else if(!!stored_refresh_token && stored_refresh_token !=='undefined'){
             //refresh_tokenがある場合
-            axios.get(`${BASE_URL}/spotify/auth/refreshAccessToken?refresh_token=${stored_refresh_token}`).then(res => {
+            axios.get(`${BASE_URL}/spotify/auth/refreshAccessToken?mode=DEV&refresh_token=${stored_refresh_token}`).then(res => {
                 localStorage.setItem('expires_in', res.data.expires_in);
                 localStorage.setItem('access_token', res.data.access_token);
                 callback(null, res.data.access_token);
@@ -75,7 +75,7 @@ export default {
 
         }else if(code){
             //codeがある場合
-            axios.get(`${BASE_URL}/spotify/auth/authorizationCodeGrant?code=${code}`).then(res => {
+            axios.get(`${BASE_URL}/spotify/auth/authorizationCodeGrant?mode=DEV&code=${code}`).then(res => {
                 let data = res.data.body ? res.data.body : res.data;
                 localStorage.setItem('expires_in',   data.expires_in);
                 localStorage.setItem('access_token', data.access_token);
