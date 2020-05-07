@@ -7,7 +7,7 @@ let params = keys.spotifyParams;
 
 let setSpotifyApi = function(type,req=null){
 
-    let mode = req.query.mode || null;
+    let mode = req && req.query && req.query.mode || null;
 
     let redirectUri = !!mode && mode==='DEV' ? 'http://127.0.0.1:8080/callback' : params[type].redirectUri;
 
@@ -74,8 +74,8 @@ router.get('/authorizationCode', (req,res)=>{
 router.get('/authorizationCodeGrant',(req,res)=>{
     let type = req.query.type || 'emory';
     const spotifyApi = setSpotifyApi(type,req);
-
     const code = req.query.code;
+
     spotifyApi.authorizationCodeGrant(code).then(data => {
             spotifyApi.setAccessToken(data.body['access_token']);
             spotifyApi.getMe().then(res2 => {
