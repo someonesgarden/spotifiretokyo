@@ -5,11 +5,15 @@ const SpotifyWebApi = require('spotify-web-api-node');
 let params = keys.spotifyParams;
 
 
-let setSpotifyApi = function(type){
+let setSpotifyApi = function(type,req=null){
 
-    const hostname = location.href.hostname;
-    const protocol = hostname.indexOf('localhost') !== -1 || hostname.indexOf('127.0.0.1') !== -1 ? 'http://' : 'https://';
-    const redirectUri = protocol + hostname + '/callback';
+    let redirectUri = params[type].redirectUri;
+
+    if(req){
+        const hostname = req.get('host');
+        const protocol = hostname.indexOf('localhost') !== -1 || hostname.indexOf('127.0.0.1') !== -1 ? 'http://' : 'https://';
+        redirectUri = protocol + hostname + '/callback';
+    }
 
     return new SpotifyWebApi({
         scope:params[type].scopes.join(' '),
@@ -19,8 +23,8 @@ let setSpotifyApi = function(type){
     });
 }
 
-let getAuthorizeURL = function(type='emory') {
-    const spotifyApi = setSpotifyApi(type);
+let getAuthorizeURL = function(type='emory',req=null) {
+    const spotifyApi = setSpotifyApi(type,req);
     let state = '';
     let length = 40;
     let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -31,7 +35,7 @@ let getAuthorizeURL = function(type='emory') {
 }
 
 router.get('/clientCredentialsGrant', (req,res)=>{
-    const spotifyApi = setSpotifyApi('emory');
+    const spotifyApi = setSpotifyApi('emory',req);
       spotifyApi.clientCredentialsGrant().then(
         function(data) {
           let result = {
@@ -64,7 +68,7 @@ router.get('/authorizationCode', (req,res)=>{
 
 router.get('/authorizationCodeGrant',(req,res)=>{
     let type = req.query.type || 'emory';
-    const spotifyApi = setSpotifyApi(type);
+    const spotifyApi = setSpotifyApi(type,req);
 
     const code = req.query.code;
     spotifyApi.authorizationCodeGrant(code).then(data => {
@@ -91,7 +95,7 @@ router.get('/authorizationCodeGrant',(req,res)=>{
 router.get('/refreshAccessToken', (req,res)=>{
 
     let type = req.query.type || 'emory';
-    const spotifyApi = setSpotifyApi(type);
+    const spotifyApi = setSpotifyApi(type,req);
     const refresh_token = req.query.refresh_token;
     spotifyApi.setRefreshToken(refresh_token);
     spotifyApi.refreshAccessToken().then(
@@ -107,27 +111,6 @@ router.get('/refreshAccessToken', (req,res)=>{
         }
     );
 });
-
-
-// Refresh Access Token
-// router.post('/refreshAccessToken', (req,res)=>{
-//
-//     let type = req.query.type || 'emory';
-//     const spotifyApi = setSpotifyApi(type);
-//
-//     spotifyApi.setAccessToken(req.body['access_token']);
-//     spotifyApi.setRefreshToken(req.body['refresh_token']);
-//     spotifyApi.refreshAccessToken().then(
-//         function(data) {
-//             res.send({...data.body, refresh_token: req.body['refresh_token']});
-//         },
-//         function(err) {
-//             console.log('Could not refresh the token!', err.message);
-//             res.redirect('/sendAuthorizeURL');
-//             res.send(null);
-//         }
-//     );
-// });
 
 
 
