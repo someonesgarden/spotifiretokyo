@@ -13,7 +13,12 @@ const store = {
         // base_url :'https://www.spotifire.tokyo',
         auth:{
           main:{id:'brain',pw:'brainbrain',matched:false}
-        }
+        },
+
+        anime:{
+            className:'fade',
+            timeout:{ enter: 400, exit: 100 },
+        },
     }
 };
 

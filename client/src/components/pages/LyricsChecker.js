@@ -1,23 +1,23 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import auth from './utils/spotify/auth';
+import auth from '../../utils/spotify/auth';
 
-import './App.scss';
-import Header from './components/spotify/Header';
-import Footer from './components/spotify/Footer';
-import UserPlaylists from './components/spotify/UserPlaylists';
-import MainView from './components/spotify/MainView';
-import ArtWork from './components/spotify/ArtWork';
-import MainHeader from './components/spotify/MainHeader';
-import SideMenu from './components/spotify/SideMenu';
-import {ActionType} from './redux/spotify/index';
+import '../../scss/LyricsChecker.scss';
+import Header from '../spotify/Header';
+import Footer from '../spotify/Footer';
+import UserPlaylists from '../spotify/UserPlaylists';
+import MainView from '../spotify/MainView';
+import ArtWork from '../spotify/ArtWork';
+import MainHeader from '../spotify/MainHeader';
+import SideMenu from '../spotify/SideMenu';
+import {ActionType} from '../../redux/spotify/index';
 import Button from "@material-ui/core/Button";
 
 
-import LoginModal from './components/common/LoginModal';
+import LoginModal from '../common/LoginModal';
 
 
-class App extends Component {
+class LyricsChecker extends Component {
 
     static audio;
 
@@ -235,4 +235,4 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(LyricsChecker);

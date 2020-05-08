@@ -4,12 +4,8 @@ import {ActionType} from "../../../redux/actions";
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import "./styles.scss";
-
 
 class InfoModal extends Component {
-
-
    constructor(props){
        super(props);
        const {type,auth} = this.props;
@@ -24,7 +20,6 @@ class InfoModal extends Component {
 
        if(sessionStorage.getItem('auth_try'+type)){
            let auth_info=JSON.parse(sessionStorage.getItem('auth_try'+type));
-           console.log(auth_info);
             this.tryLogin(auth_info.id,auth_info.pw);
        }
    }
@@ -65,9 +60,8 @@ class InfoModal extends Component {
                    <p id="info">enter id and pass.</p>
                    <TextField label="ID" defaultValue="" onChange={(val)=> id = val.target.value}/>
                    <TextField label="PASS" type="password" defaultValue="" onChange={(val)=> pw = val.target.value}/>
-
-                   <Button variant="contained" size='small' style={{marginTop:20}} onClick={()=>this.tryLogin(id,pw)}>
-                       LOGIN
+                   <Button color="primary" fullWidth={true}  variant="contained" size='small' style={{marginTop:20}} onClick={()=>this.tryLogin(id,pw)}>
+                       ENTER.
                    </Button>
                </div>
            </Modal>
