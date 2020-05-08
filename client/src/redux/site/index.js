@@ -8,9 +8,10 @@ export const ActionType = {
 
 const store = {
     site:{
-        mode:"DEV",
-        base_url :'http://localhost:3030',
-        //base_url :'http://localhost:8080',
+        //mode:"DEV",
+        //base_url :'http://localhost:3030',
+        mode:"PROD",
+        base_url :'http://localhost:8080',
         // base_url :'https://www.spotifire.tokyo',
         auth: {
             main: {id: 'brain', pw: 'brainbrain', matched: false},
