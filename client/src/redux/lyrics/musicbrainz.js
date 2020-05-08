@@ -11,6 +11,7 @@ let store = {
 
 const reducer = {
 	[ActionType.MB_GET_TRACK_ISRC_OK]: (payload) => {
+
 		if(payload.value.tracks.length>0) {
 			store.tracks[payload.value.isrc] = payload.value.tracks;
 			console.log("tracks!",store.tracks)

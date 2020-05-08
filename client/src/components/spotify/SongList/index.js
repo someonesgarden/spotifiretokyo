@@ -17,17 +17,23 @@ const mapStateToProps = (state) => {
     mbtracks:state.app.mbReducer.tracks,
     mbupdated:state.app.mbReducer.mbupdated,
     mmlyrics:state.app.mmReducer.lyrics,
-    mmupdated:state.app.mmReducer.mmupdated
+    mmupdated:state.app.mmReducer.mmupdated,
 
+    kglyrics:state.app.kgReducer.lyrics,
+    kgupdated:state.app.kgReducer.kgupdated,
+    kgloading:state.app.kgReducer.kgloading,
+
+
+    base_url:state.app.site.base_url
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   fetchSongs: (data) => dispatch({type: ActionType.SAGA_FETCH_SONGS, value: data}),
-
   addSongToLibrary: (accessToken, id) => dispatch({type: ActionType.SAGA_ADD_SONG_TO_LIBRARY, value:{accessToken, id}}),
   mbIsrcTracks: (data) => dispatch({type: ActionType.SAGA_MB_GET_TRACK_ISRC, value: data}),
-  mmGetLyrics: (data) => dispatch({type: ActionType.SAGA_MM_GET_LYRICS_MBID, value: data}),
+  mmGetLyricsOK:(isrc,lyrics) => dispatch({type:ActionType.MM_GET_LYRICS_MBID_OK, value:{isrc,lyrics}}),
+  kgGetLyrics:(isrc,song,artist) => dispatch({type:ActionType.SAGA_KGET_LYRICS,value:{isrc,song,artist}})
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SongList);

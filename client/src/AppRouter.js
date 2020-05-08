@@ -9,9 +9,7 @@ import LoginModal from "./components/common/LoginModal";
 
 
 const AppRouter = (props) => {
-    const {site, location} = props;
-
-    const site_auth_success = sessionStorage.getItem('site_auth_success');
+    const {site, location,auth_updated} = props;
 
     return (
         <React.Fragment>
@@ -25,7 +23,7 @@ const AppRouter = (props) => {
                 </CSSTransition>
             </TransitionGroup>
             {
-                <LoginModal open={site_auth_success} type="main"/>
+                <LoginModal open={site.auth["main"].matched} type="main"/>
             }
         </React.Fragment>
     )
@@ -34,7 +32,8 @@ const AppRouter = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        site: state.app.site
+        site: state.app.site,
+        auth_updated:state.app.site.auth_updated
     };
 };
 

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import moment from 'moment/moment';
 import Button from "@material-ui/core/Button";
-
+import axios from 'axios';
+import Loader from 'react-loader-spinner'
 
 class SongList extends Component {
 
@@ -24,29 +25,56 @@ class SongList extends Component {
 
   lyricsAction(type,val){
     const {mbtracks} = this.props;
-    const {mbIsrcTracks,mmGetLyrics} = this.props;
-
+    const {mbIsrcTracks,kgGetLyrics} = this.props;
 
     if(type==='musicbrainz'){
-
       const song = val;
       const isrc = song && song.track && song.track.external_ids && song.track.external_ids.isrc;
       mbIsrcTracks(isrc);
+
     }else if(type==='musixmatch'){
-      const isrc = val;
-      const mbid0 = mbtracks[isrc][0] && mbtracks[isrc][0].id;
-      mmGetLyrics(mbid0);
 
+      this._fetchMMLyricses(val);
+
+    }else if(type==='kget'){
+
+      const song = val;
+      if(song && song.track) {
+        const name = song.track.name;
+        const artist = song.track.artists && song.track.artists[0].name;
+        const isrc = song.track && song.track.external_ids && song.track.external_ids.isrc;
+
+        kgGetLyrics(isrc,name,artist)
+
+        this.setState({loading:true})
+      }
     }
-
-
   }
 
-  renderSongs() {
-    const {songs,songId,songPaused,songPlaying,mbtracks} = this.props;
-    const {resumeSong,pauseSong,audioControl} = this.props;
 
-    console.log("mbtracks",mbtracks);
+  _fetchMMLyricses(isrc){
+    const {base_url,mmGetLyricsOK,mbtracks} = this.props;
+    const api       = axios.create();
+    let queries = [];
+
+    mbtracks[isrc].map(track=> {
+      queries.push(
+          api.get(`${base_url}/musixmatch/track/trackLyrics?mbid=${track.id}`))
+    })
+
+    queries = queries.slice(0,5);
+
+    Promise.all(queries).then(res => {
+      let ary = res.map(re => re.data.message && re.data.message.body && re.data.message.body.lyrics).filter(d=>d)
+      let _ = (ary.length>0) ? mmGetLyricsOK(isrc,ary[0]) : mmGetLyricsOK(isrc,null)
+
+    }).catch(err=>console.log(err));
+  }
+
+
+  renderSongs() {
+    const {songs,songId,songPaused,songPlaying,mbtracks,mmlyrics,kglyrics,kgloading} = this.props;
+    const {resumeSong,pauseSong,audioControl} = this.props;
 
     return songs.map((song, i) => {
 
@@ -72,32 +100,50 @@ class SongList extends Component {
           </div>
 
           {
-
             isrc && (
                 <React.Fragment>
                   <div className={['lyrics', mbtracks[isrc] ? 'searched' : ''].join(' ')}>
+
                     {mbtracks[isrc] && <p className='mb_info'>{mbtracks[isrc].length} tracks in MusicBrainz.</p>}
+                    {mmlyrics[isrc] && <p className='mm_lyrics'>[musixmatch] 「{mmlyrics[isrc]}」</p>}
+                    {kglyrics[isrc] && <p className='kg_lyrics'>[歌詞ゲット] 「{kglyrics[isrc]}」</p>}
+                    <Loader
+                        className={['loader',kgloading ? 'visible' :null].join(' ')}
+                        type="Puff"
+                        color="#22EE33aa"
+                        height={100}
+                        width={100}//3 secs
+                    />
                   </div>
 
                 <div className="lyricsBtns">
+
                   {
                     !mbtracks[isrc] && <Button variant="contained" style={{backgroundColor:'#1bd6ab'}} size="small" onClick={()=> this.lyricsAction('musicbrainz',song)}>MusicBrainz</Button>
                   }
 
                   {
-                    mbtracks[isrc] && mbtracks[isrc].length>0 && (
+                    mbtracks[isrc] && (
                        <React.Fragment>
-                         <Button variant="contained" style={{backgroundColor:'#d6433b',color:'white'}} size="small" onClick={()=>this.lyricsAction('musixmatch',isrc)}>MusixMatch</Button>
-                         <Button variant="contained" color="primary" size="small">Kashi-Get</Button>
+
+                         {
+                           !mmlyrics[isrc] && mbtracks[isrc].length>0 && <Button variant="contained" style={{backgroundColor:'#d6433b',color:'white'}} size="small" onClick={()=>this.lyricsAction('musixmatch',isrc)}>MusixMatch</Button>
+                         }
+
+                         {
+                           !kglyrics[isrc] &&  <Button variant="contained" color="primary" size="small" onClick={()=> this.lyricsAction('kget', song)} >Kashi-Get</Button>
+                         }
+
+
                          {/*<Button variant="contained" color="secondary" size="small">Genius</Button>*/}
+
                        </React.Fragment>
                     )
                   }
-
                 </div>
+
                 </React.Fragment>
             )
-
           }
 
         </li>

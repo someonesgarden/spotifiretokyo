@@ -74,8 +74,7 @@ class InfoModal extends Component {
 const mapStateToProps = (state) => {
     return {
         //auth: state.
-        auth:state.app.site.auth
-
+        auth:state.app.site.auth,
     }
 };
 

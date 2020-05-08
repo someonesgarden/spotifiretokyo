@@ -11,9 +11,16 @@ let store = {
 
 const reducer = {
 	[ActionType.MM_GET_LYRICS_MBID_OK]: (payload) => {
+		//let mbid   = payload.value && payload.value.mbid;
+		let isrc   = payload.value && payload.value.isrc;
+		let lyrics = payload.value && payload.value.lyrics;
+		if(lyrics && lyrics.lyrics_body){
+			store.lyrics[isrc] = lyrics.lyrics_body;
+		}else{
+			store.lyrics[isrc] = "NO DATA";
+		}
 
-		console.log("PPP",payload);
-		//store.mmupdated = payload.value.isrc
+		store.mmupdated = isrc
 
 		return {
 			...payload.state.mmReducer,

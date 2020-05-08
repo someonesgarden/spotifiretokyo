@@ -7,10 +7,12 @@ export default function* spotifyWatcher() {
     yield takeLatest('SAGA_MM_GET_LYRICS_MBID', mmGetLyrics);
 }
 
-
 function* mmGetLyrics(action) {
     const BASE_URL = siteStore.store.site.base_url;
-    const mbid = action.value;
-    const result = yield axios.get(`${BASE_URL}/musixmatch/track/trackLyrics?mbid=${mbid}`).then(res =>res.data).catch(err => err.response)
-    yield put({type:'MM_GET_LYRICS_MBID_OK',value:{lyrics:result,isrc:mbid}})
+    const mbid = action.value.mbid;
+    const isrc = action.value.isrc;
+    const result = yield axios.get(`${BASE_URL}/musixmatch/track/trackLyrics?mbid=${mbid}`).then(res => {
+            return res.data.message && res.data.message.body && res.data.message.body.lyrics
+        }).catch(err => err.response)
+    yield put({type:'MM_GET_LYRICS_MBID_OK',value:{lyrics:result,mbid:mbid,isrc:isrc}})
 }

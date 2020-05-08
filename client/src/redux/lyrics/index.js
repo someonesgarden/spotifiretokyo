@@ -1,20 +1,24 @@
 import mb from './musicbrainz';
 import mm from './musixmatch';
+import kg from './kget';
 
 const store = {
     mbReducer:mb.store,
-    mmReducer:mm.store
+    mmReducer:mm.store,
+    kgReducer:kg.store
 
 };
 
 export const ActionType = {
     ...mb.ActionType,
-    ...mm.ActionType
+    ...mm.ActionType,
+    ...kg.ActionType,
 };
 
 const reducer = {
     ...mb.reducer,
-    ...mm.reducer
+    ...mm.reducer,
+    ...kg.reducer
 };
 
 
