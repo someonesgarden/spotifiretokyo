@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 const mapStateToProps = (state) => {
 
   return {
-    headerTitle: state.uiReducer.title
+    headerTitle: state.app.uiReducer.title
   };
 
 };

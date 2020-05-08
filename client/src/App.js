@@ -164,7 +164,8 @@ class App extends Component {
                     {
                         mode === 'error' && (
                             <div className="login">
-                                <Button onClick={() => this._login()} variant="contained" size="large" color="primary">Login</Button>
+                                <img src="/images/lyrics_logo.png"  onClick={() => this._login()} />
+                                {/*<Button onClick={() => this._login()} variant="contained" size="large" color="primary">Login</Button>*/}
                             </div>
                         )
                     }
@@ -215,8 +216,8 @@ class App extends Component {
 const mapStateToProps = (state) => {
 
     return {
-        access_token: state.tokenReducer.access_token,
-        volume: state.soundReducer.volume
+        access_token: state.app.tokenReducer.access_token,
+        volume: state.app.soundReducer.volume
     };
 
 };

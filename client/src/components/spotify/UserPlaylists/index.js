@@ -4,10 +4,10 @@ import {ActionType} from '../../../redux/spotify';
 
 const mapStateToProps = (state) => {
 	return {
-		userId: state.userReducer.user ? state.userReducer.user.id : '',
-		playlistMenu: state.playlistReducer.playlistMenu ? state.playlistReducer.playlistMenu : '',
-		access_token: state.tokenReducer.access_token ? state.tokenReducer.access_token : '',
-		title: state.uiReducer.title
+		userId: state.app.userReducer.user ? state.app.userReducer.user.id : '',
+		playlistMenu: state.app.playlistReducer.playlistMenu ? state.app.playlistReducer.playlistMenu : '',
+		access_token: state.app.tokenReducer.access_token ? state.app.tokenReducer.access_token : '',
+		title: state.app.uiReducer.title
 	};
 };
 

@@ -5,10 +5,10 @@ import {ActionType} from '../../../redux/spotify';
 
 const mapStateToProps = (state) => {
   return {
-    userId: state.userReducer.user ? state.userReducer.user.id : '',
-    access_token: state.tokenReducer.access_token ? state.tokenReducer.access_token : '',
-    artistIds: state.artistsReducer.artistIds,
-    title: state.uiReducer.title
+    userId: state.app.userReducer.user ? state.app.userReducer.user.id : '',
+    access_token: state.app.tokenReducer.access_token ? state.app.tokenReducer.access_token : '',
+    artistIds: state.app.artistsReducer.artistIds,
+    title: state.app.uiReducer.title
   };
 };
 

@@ -5,9 +5,9 @@ import {ActionType} from '../../../redux/spotify';
 const mapStateToProps = (state) => {
 
   return {
-    view: state.browseReducer.view,
-    viewType: state.songsReducer.viewType,
-    access_token: state.tokenReducer.access_token
+    view: state.app.browseReducer.view,
+    viewType: state.app.songsReducer.viewType,
+    access_token: state.app.tokenReducer.access_token
   };
 };
 

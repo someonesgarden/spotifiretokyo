@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 const mapStateToProps = (state) => {
 
 	return {
-		displayName: state.userReducer.user ? state.userReducer.user.display_name : '',
-		userImage: state.userReducer.user && state.userReducer.user.images[0] ? state.userReducer.user.images[0].url : ''
+		displayName: state.app.userReducer.user ? state.app.userReducer.user.display_name : '',
+		userImage: state.app.userReducer.user && state.app.userReducer.user.images[0] ? state.app.userReducer.user.images[0].url : ''
 	};
 
 };

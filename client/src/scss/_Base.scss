@@ -50,6 +50,10 @@ body {
   align-items: center;
   transition: opacity 2s ease-out;
   opacity:1;
+  img{
+    width:300px;
+    height:300px;
+  }
 }
 
 .initial {
@@ -60,4 +64,6 @@ body {
   align-items: center;
   transition: opacity 2s ease-out;
   opacity:1;
+
+
 }

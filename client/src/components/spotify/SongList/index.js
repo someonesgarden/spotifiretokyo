@@ -4,20 +4,20 @@ import {ActionType} from "../../../redux/actions";
 
 const mapStateToProps = (state) => {
   return {
-    access_token: state.tokenReducer.access_token ? state.tokenReducer.access_token : '',
-    songs: state.songsReducer.songs ? state.songsReducer.songs : '',
-    fetchSongsError: state.songsReducer.fetchSongsError,
-    fetchSongsPending: state.songsReducer.fetchSongsPending,
-    fetchPlaylistSongsPending: state.songsReducer.fetchPlaylistSongsPending,
-    songPlaying: state.songsReducer.songPlaying,
-    songPaused: state.songsReducer.songPaused,
-    songId: state.songsReducer.songId,
-    songAddedId: state.userReducer.songId || '',
-    viewType: state.songsReducer.viewType,
-    mbtracks:state.mbReducer.tracks,
-    mbupdated:state.mbReducer.mbupdated,
-    mmlyrics:state.mmReducer.lyrics,
-    mmupdated:state.mmReducer.mmupdated
+    access_token: state.app.tokenReducer.access_token ? state.app.tokenReducer.access_token : '',
+    songs: state.app.songsReducer.songs ? state.app.songsReducer.songs : '',
+    fetchSongsError: state.app.songsReducer.fetchSongsError,
+    fetchSongsPending: state.app.songsReducer.fetchSongsPending,
+    fetchPlaylistSongsPending: state.app.songsReducer.fetchPlaylistSongsPending,
+    songPlaying: state.app.songsReducer.songPlaying,
+    songPaused: state.app.songsReducer.songPaused,
+    songId: state.app.songsReducer.songId,
+    songAddedId: state.app.userReducer.songId || '',
+    viewType: state.app.songsReducer.viewType,
+    mbtracks:state.app.mbReducer.tracks,
+    mbupdated:state.app.mbReducer.mbupdated,
+    mmlyrics:state.app.mmReducer.lyrics,
+    mmupdated:state.app.mmReducer.mmupdated
 
   };
 };

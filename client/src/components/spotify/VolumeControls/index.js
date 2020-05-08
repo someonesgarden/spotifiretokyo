@@ -4,7 +4,7 @@ import {ActionType} from '../../../redux/spotify';
 
 const mapStateToProps = (state) => {
   return {
-    volume: state.soundReducer.volume
+    volume: state.app.soundReducer.volume
   };
 };
 

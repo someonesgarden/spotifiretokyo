@@ -35,10 +35,6 @@ const commonReducer = (payload) => {
   }
 };
 
-export const totalReducer = (state = state0, action) => {
-  return commonReducer({
-    state: state,
-    value: action.value,
-    actionType: action.type
-  });
+export const tasksReducer = (state = state0, action) => {
+  return commonReducer({state: state, value: action.value, actionType: action.type});
 };

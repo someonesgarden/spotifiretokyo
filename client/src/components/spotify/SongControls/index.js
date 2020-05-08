@@ -6,13 +6,13 @@ import {ActionType} from '../../../redux/spotify';
 const mapStateToProps = (state) => {
 
   return {
-    songName: state.songsReducer.songDetails ? state.songsReducer.songDetails.name : '',
-    artistName: state.songsReducer.songDetails ? state.songsReducer.songDetails.artists[0].name : '',
-    songPlaying: state.songsReducer.songPlaying,
-    timeElapsed: state.songsReducer.timeElapsed,
-    songPaused: state.songsReducer.songPaused,
-    songDetails: state.songsReducer.songDetails,
-    songs: state.songsReducer.songs
+    songName: state.app.songsReducer.songDetails ? state.app.songsReducer.songDetails.name : '',
+    artistName: state.app.songsReducer.songDetails ? state.app.songsReducer.songDetails.artists[0].name : '',
+    songPlaying: state.app.songsReducer.songPlaying,
+    timeElapsed: state.app.songsReducer.timeElapsed,
+    songPaused: state.app.songsReducer.songPaused,
+    songDetails: state.app.songsReducer.songDetails,
+    songs: state.app.songsReducer.songs
   };
 };
 
