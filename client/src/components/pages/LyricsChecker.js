@@ -13,10 +13,6 @@ import SideMenu from '../spotify/SideMenu';
 import {ActionType} from '../../redux/spotify/index';
 import Button from "@material-ui/core/Button";
 
-
-import LoginModal from '../common/LoginModal';
-
-
 class LyricsChecker extends Component {
 
     static audio;
@@ -204,9 +200,7 @@ class LyricsChecker extends Component {
                         )
                     }
                 </div>
-                {
-                    <LoginModal open={true} type="main"/>
-                }
+
             </div>
         );
     }

@@ -33,6 +33,7 @@ class InfoModal extends Component {
            setTimeout(()=> {
 
                if(auth[type].matched){
+                   sessionStorage.setItem('site_auth_success',true);
                    this.setState({open:false})
                }else{
 

@@ -12,7 +12,7 @@ let store = {
 const reducer = {
 	[ActionType.MM_GET_LYRICS_MBID_OK]: (payload) => {
 
-		console.log(payload);
+		console.log("PPP",payload);
 		//store.mmupdated = payload.value.isrc
 
 		return {

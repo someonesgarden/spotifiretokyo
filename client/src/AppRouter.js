@@ -5,10 +5,13 @@ import {TransitionGroup, CSSTransition} from 'react-transition-group';
 import {ActionType} from "./redux/actions";
 
 import AppPage from './components/pages/LyricsChecker';
+import LoginModal from "./components/common/LoginModal";
 
 
 const AppRouter = (props) => {
     const {site, location} = props;
+
+    const site_auth_success = sessionStorage.getItem('site_auth_success');
 
     return (
         <React.Fragment>
@@ -21,6 +24,9 @@ const AppRouter = (props) => {
                     </Switch>
                 </CSSTransition>
             </TransitionGroup>
+            {
+                <LoginModal open={site_auth_success} type="main"/>
+            }
         </React.Fragment>
     )
 };
