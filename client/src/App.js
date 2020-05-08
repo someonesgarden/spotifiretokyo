@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import auth from './utils/spotify/auth';
-import axios from 'axios';
 
 import './App.scss';
 import Header from './components/spotify/Header';
@@ -13,6 +12,9 @@ import MainHeader from './components/spotify/MainHeader';
 import SideMenu from './components/spotify/SideMenu';
 import {ActionType} from './redux/spotify/index';
 import Button from "@material-ui/core/Button";
+
+
+import LoginModal from './components/common/LoginModal';
 
 
 class App extends Component {
@@ -201,6 +203,9 @@ class App extends Component {
                         )
                     }
                 </div>
+                {
+                    <LoginModal open={true} type="main"/>
+                }
             </div>
         );
     }

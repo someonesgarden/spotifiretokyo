@@ -7,6 +7,9 @@ import browseWatcher from './watchers/spotify/browse';
 import songWatcher from './watchers/spotify/song';
 import userWatcher from './watchers/spotify/user';
 
+import musicBrainzWatcher from './watchers/lyrics/musicbrainz';
+import musixMatchWatcher from './watchers/lyrics/musixmatch';
+
 export default function* rootSaga() {
 
     try {
@@ -16,7 +19,9 @@ export default function* rootSaga() {
             playlistWatcher(),
             browseWatcher(),
             songWatcher(),
-            userWatcher()
+            userWatcher(),
+            musicBrainzWatcher(),
+            musixMatchWatcher()
         ]);
     } catch (error) {
         yield put({type:'ASN_FAILED_LOGONLY', value:error})

@@ -1,20 +1,27 @@
 import spotifyStore from './spotify';
+import siteStore from './site';
+import lyricsStore from './lyrics';
 
 
 export const state = {
-  ...spotifyStore.store
+  ...spotifyStore.store,
+  ...siteStore.store,
+  ...lyricsStore.store
 };
 
 export const state0 = {
-  ...spotifyStore.store
+  ...spotifyStore.store,
+  ...siteStore.store,
+  ...lyricsStore.store
 };
-
 
 
 
 const commonReducer = (payload) => {
   const reducer = {
-    ...spotifyStore.reducer
+    ...spotifyStore.reducer,
+    ...siteStore.reducer,
+    ...lyricsStore.reducer
   };
 
   //ASYNC

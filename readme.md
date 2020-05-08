@@ -98,3 +98,21 @@ foreverなどのコマンドがちゃんと動くように設計すること！
 clientフォルダ内で
 npm run buildを行うことでapi-server/public/staticというフォルダが作成される。
 サイトの動作に必要。
+
+
+#### DEVモード（localのapi-serverを呼び出す場合）
+1. ローカルのapi-serevr/index.jsのportは3030
+2. client/src/reduc/site/index.jsのbase_urlを'http://localhost:3030'、
+mode="DEV"にする。
+
+#### DEV2モード（localのclientからGCDのapi-serverを呼び出す場合）
+1. ローカルのapi-serevr/index.jsのportは8080（こちらは呼び出さないので関係ない）
+2. client/src/reduc/site/index.jsのbase_urlを'https://www.spotifire.tokyo'、
+mode="DEV"にする。
+
+ #### PRODモード(GCDに設置したapi-serverを呼び出す場合)
+ 1. CGDのapi-server/index.jsのportを8080に
+ 2.  client/src/reduc/site/index.jsのbase_urlを'http://localhost:8080'、
+ modeを"PROD"にする。
+ 
+

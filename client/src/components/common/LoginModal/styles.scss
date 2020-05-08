@@ -1,0 +1,42 @@
+.loginModal{
+    .paper{
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items:center;
+        width:100vw;
+        height:100vh;
+        background-color: rgba(243, 0, 176, 0.9);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        h1{
+            font-size:2rem;
+            color:white;
+        }
+        p{
+            span{
+                color:white;
+                margin-right:20px;
+                width:100%;
+                display:block;
+            }
+            font-size:0.8rem;
+            margin:2rem 0;
+            line-height:1.2rem;
+            color: #ffb600;
+            word-break: break-all;
+        }
+
+        label.MuiFormLabel-root{
+            color: #86f707;
+        }
+
+        input.MuiInputBase-input{
+            color:white;
+        }
+    }
+
+}

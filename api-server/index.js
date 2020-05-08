@@ -155,7 +155,11 @@ app.use('/props',        props);
 
 //8080で起動すると、Nginxによって80番に転送される
 ///etc/nginx/conf.d/node-app.conf
-const PORT = 8080;
+
+//ローカルでwebpack-dev-serverと共存させる際には3030、
+//GCPで本番起動する場合は8080
+const PORT = 3030;
+// const PORT = 8080;
 http.listen(PORT, ()=>{
     console.log('server listening. Port:' + PORT);
 });

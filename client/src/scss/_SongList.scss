@@ -36,7 +36,7 @@ li.user-song-item {
   }
 
   &:hover {
-    background: rgb(31, 35, 38);
+    background: rgb(52, 68, 66);
   }
 
   &.active, &:hover {
@@ -75,15 +75,37 @@ li.user-song-item {
   }
 
   .lyrics{
+    min-width:200px;
+    height:160px;
+    overflow-y: scroll;
+    padding:1rem;
+    background-color: rgba(236, 255, 244, 0.3);
+    border-radius:6px;
+
+    &.searched{
+      background-color: #ecfff4;
+    }
+
+    p{
+      &.mb_info{
+        border-bottom:thin dashed $primary;
+        padding-bottom:4px;
+      }
+    }
+
+  }
+
+  .lyricsBtns{
     display: flex;
     align-items: center;
     flex-direction: column;
-    min-width:20px;
+    min-width:120px;
     padding:1rem;
 
+
     button{
-      margin:2px;
-      min-width:120px;
+      margin:2px 0;
+      width:120px;
     }
   }
 }

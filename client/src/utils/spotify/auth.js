@@ -1,9 +1,7 @@
-//import userStore from "../../redux/spotify/user";
-import tokenStore from "../../redux/spotify/token";
 import axios from 'axios';
-const BASE_URL = 'https://www.spotifire.tokyo';
+import tokenStore from "../../redux/spotify/token";
+import siteStore from "../../redux/site/index";
 
-const MODE = 'DEV';
 
 export default {
     c_implicitGrant:function() {
@@ -15,6 +13,10 @@ export default {
             window.location.href = url;
     },
     c_getCredenetialCode:function(type=''){
+
+        const MODE = siteStore.store.site.mode;
+        const BASE_URL = siteStore.store.site.base_url;
+
         let state = '';
         let length = 40;
         let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -40,6 +42,9 @@ export default {
     },
 
     c_validateAccessToken(type, callback){
+        const MODE = siteStore.store.site.mode;
+        const BASE_URL = siteStore.store.site.base_url;
+
         const {code} = this.c_webHash();
         const {refresh_token} = tokenStore.store;
         let stored_refresh_token = refresh_token ? refresh_token : localStorage.getItem('refresh_token');
