@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import axios from 'axios'
 import { takeLatest, put} from 'redux-saga/dist/redux-saga-effects-npm-proxy.esm'
 import uniqBy from "lodash/uniqBy";
@@ -9,6 +11,9 @@ export default function* spotifyWatcher() {
 
 function* fetchAlbums(action) {
     yield put({type: 'FETCH_ALBUMS_PENDING'});
+
+
+
 
     const result = yield axios.get(`https://api.spotify.com/v1/me/albums`,
         {headers: {'Authorization': 'Bearer ' + action.value}}).then(res =>{

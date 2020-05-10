@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 
 const AlbumList = ({ songs, audioControl }) => {
 
+  let id = 0;
+
   const renderAlbums = () => {
+
     return songs.map((song, i) => {
       return (
         <li
@@ -11,7 +14,8 @@ const AlbumList = ({ songs, audioControl }) => {
           className='album-item'
           key={ i }
         >
-          <div>
+          <div className='album-inner'>
+
             <div className='album-image'>
               <img src={song.track.album.images[0].url} />
               <div className='play-song'>

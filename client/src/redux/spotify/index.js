@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import album from './album';
 import artist from './artist';
 import browse from './browse';
@@ -10,15 +12,15 @@ import user from './user';
 
 
 const store = {
-    albumReducer:album.store,
-    artistsReducer:artist.store,
-    browseReducer:browse.store,
-    playlistReducer:playlist.store,
-    songsReducer:song.store,
-    soundReducer:sound.store,
-    tokenReducer:token.store,
-    uiReducer:ui.store,
-    userReducer:user.store
+    albumReducer: album.store,
+    artistsReducer: artist.store,
+    browseReducer: browse.store,
+    playlistReducer: playlist.store,
+    songsReducer: song.store,
+    soundReducer: sound.store,
+    tokenReducer: token.store,
+    uiReducer: ui.store,
+    userReducer: user.store
 };
 
 export const ActionType = {

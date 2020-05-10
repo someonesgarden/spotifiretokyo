@@ -18,11 +18,22 @@
   cursor: pointer;
 }
 
+.album-inner{
+  position:relative;
+
+
+}
+
 .album-image {
   position: relative;
 
   img {
     width: 100%;
+  }
+
+  iframe.presavebtn{
+    position:absolute;
+    bottom:20px;
   }
 }
 

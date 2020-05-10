@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import mb from './musicbrainz';
 import mm from './musixmatch';
 import kg from './kget';

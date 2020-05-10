@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 export default {
     c_msToMinutesAndSeconds(ms){
         const minutes = Math.floor(ms / 60000);

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import axios from 'axios'
 import { takeLatest, put} from 'redux-saga/dist/redux-saga-effects-npm-proxy.esm'
 

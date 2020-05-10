@@ -1,9 +1,12 @@
+/* eslint-disable */
+
 import React from 'react';
 import {Route, Switch, withRouter} from 'react-router-dom';
 import {connect} from "react-redux";
 import {TransitionGroup, CSSTransition} from 'react-transition-group';
 import {ActionType} from "./redux/actions";
 
+import PreSaveWidget from './components/pages/PreSaveWidget';
 import AppPage from './components/pages/LyricsChecker';
 import LoginModal from "./components/common/LoginModal";
 
@@ -17,13 +20,15 @@ const AppRouter = (props) => {
                 <CSSTransition key={location.pathname} classNames={site.anime.className} timeout={site.anime.timeout}>
                     <Switch location={props.location}>
                         <Route exact path="/" render={() => <AppPage location={props.location}/>}/>
+                        <Route exact path="/presavewidget" render={() => <PreSaveWidget location={props.location}/>}/>
                         <Route exact path="/callback" render={() => <AppPage location={props.location}/>}/>
                         <Route exact path="/geniuscallback" render={() => <AppPage location={props.location}/>}/>
                     </Switch>
                 </CSSTransition>
             </TransitionGroup>
+
             {
-                <LoginModal open={site.auth["main"].matched} type="main"/>
+                location && location.pathname !=='/presavewidget' && <LoginModal open={site.auth["main"].matched} type="main"/>
             }
         </React.Fragment>
     )

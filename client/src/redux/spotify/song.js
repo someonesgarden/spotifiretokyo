@@ -1,4 +1,5 @@
-import uniqBy from 'lodash/uniqBy';
+/* eslint-disable */
+//import uniqBy from 'lodash/uniqBy';
 
 const ActionType = {
   UPDATE_VIEW_TYPE:'UPDATE_VIEW_TYPE',

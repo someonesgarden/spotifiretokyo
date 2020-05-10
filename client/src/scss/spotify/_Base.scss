@@ -7,9 +7,9 @@ body, p, h1, h2, h3 {
 body {
   //font-family: 'Proxima Nova', Georgia, sans-serif;
   font-family: Poppins, 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif !important;
-  background: $body-bg;
+
   color: $primary-dark;
-  max-width: 1400px;
+  //max-width: 1400px;
   margin: 0 auto;
   padding: 0;
 }
@@ -17,6 +17,8 @@ body {
 .app-container {
   display: flex;
   position: relative;
+  background: $body-bg;
+  min-height: 100vh;
 }
 
 .left-side-section {

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const ActionType = {
 	SAGA_FETCH_ALBUMS:'SAGA_FETCH_ALBUMS',
 	FETCH_ALBUMS_PENDING:'FETCH_ALBUMS_PENDING',
@@ -6,7 +8,6 @@ const ActionType = {
 };
 
 let store = {};
-
 
 const reducer = {
 	[ActionType.FETCH_ALBUMS_PENDING]: (payload) => {

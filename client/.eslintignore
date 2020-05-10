@@ -2,3 +2,9 @@ node_modules
 scripts
 public
 config
+/src/*js
+/src/components/
+/src/store/
+/src/sagas/
+/src/redux/
+/src/utils/

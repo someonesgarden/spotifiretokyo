@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { routerMiddleware } from 'connected-react-router';
 import { createStore, applyMiddleware, compose } from 'redux';
 import {tasksReducer} from '../redux';

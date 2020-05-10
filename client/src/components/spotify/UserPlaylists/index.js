@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import UserPlaylists from "./component";
 import { connect } from "react-redux";
 import {ActionType} from '../../../redux/spotify';

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 export default{
     c_reco:function(cb=null){
         let queries = {};

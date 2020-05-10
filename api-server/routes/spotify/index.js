@@ -1,29 +1,38 @@
 let express = require('express');
 let router = express.Router();
-let authRouter = require('./auth');
-let meRouter = require('./me');
-let browseRouter = require('./browse');
-let playlistRouter = require('./playlist');
-let trackRouter = require('./track');
-let artistRouter = require('./artist');
-let albumRouter = require('./album');
-let playerRouter = require('./player');
-let podcastRouter = require('./podcast');
+let authRouter      = require('./auth');
+let meRouter        = require('./me');
+let usersRouter     = require('./users');
+let browseRouter    = require('./browse');
+let playlistsRouter = require('./playlists');
+let tracksRouter    = require('./tracks');
+let artistsRouter   = require('./artists');
+let albumsRouter    = require('./albums');
+let podcastRouter   = require('./podcast');
+let recoRouter      = require('./recommendations');
+let featuresRouter  = require('./audio-features');
+let analysisRouter  = require('./audio-analysis');
+let searchRouter    = require('./search');
+
 
 const keys = require('../../keys');
 const spotifyApi = keys.spotifyApi;
 
 
 //------ ROUTINGS
-router.use('/auth', authRouter);
-router.use('/me', meRouter);
-router.use('/browse',browseRouter);
-router.use('/playlist',playlistRouter);
-router.use('/track',trackRouter);
-router.use('/artist',artistRouter);
-router.use('/album', albumRouter);
-router.use('/player',playerRouter);
-router.use('/podcast',podcastRouter);
+router.use('/auth',             authRouter);
+router.use('/me',               meRouter);
+router.use('/usersRouter',      usersRouter);
+router.use('/tracks',           tracksRouter);
+router.use('/artists',          artistsRouter);
+router.use('/albums',           albumsRouter);
+router.use('/browse',           browseRouter);
+router.use('/playlists',        playlistsRouter);
+router.use('/podcast',          podcastRouter);
+router.use('/recommendations',  recoRouter);
+router.use('/audio-features',   featuresRouter);
+router.use('/audio-analysis',   analysisRouter);
+router.use('/search',           searchRouter);
 
 
 //------ CALLBACK FROM SPOTIFY API AUTHENTICATION

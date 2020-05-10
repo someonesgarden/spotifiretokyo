@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import auth from '../../utils/spotify/auth';
@@ -153,14 +155,15 @@ class LyricsChecker extends Component {
                     {
                         mode === 'init' && (
                             <div className="initial">
-                                <Button onClick={() => this._login()} variant="contained" size="large" color="secondary">Hello</Button>
+                                <Button onClick={() => this._login()} variant="contained" size="large"
+                                        color="secondary">Hello</Button>
                             </div>
                         )
                     }
                     {
                         mode === 'error' && (
                             <div className="login">
-                                <img src="/images/lyrics_logo.png"  onClick={() => this._login()} />
+                                <img src="/images/lyrics_logo.png" onClick={() => this._login()}/>
                                 {/*<Button onClick={() => this._login()} variant="contained" size="large" color="primary">Login</Button>*/}
                             </div>
                         )

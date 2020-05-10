@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const ActionType = {
     UPDATE_VOLUME: 'UPDATE_VOLUME'
 };
@@ -13,9 +15,6 @@ const reducer = {
         }
     }
 };
-
-
-
 
 export default {
     store,

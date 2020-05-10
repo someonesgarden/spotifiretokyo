@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const ActionType = {
   SET_TOKEN:'SET_TOKEN',
   SET_CODE_AND_STATE: 'SET_CODE_AND_STATE',
@@ -41,6 +43,8 @@ const reducer = {
       if(payload.value.expires_in){
         store.expires_in = payload.value.expires_in;
         localStorage.setItem('expires_in', store.expires_in);
+        const expires_time = new Date().getTime() + payload.value.expires_in*1000;
+        localStorage.setItem('expires_time',expires_time+"");
       }
     }
 

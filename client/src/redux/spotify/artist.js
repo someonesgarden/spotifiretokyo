@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const ActionType = {
   SET_ARTIST_IDS:'SET_ARTIST_IDS',
   SAGA_FETCH_ARTISTS:'SAGA_FETCH_ARTISTS',

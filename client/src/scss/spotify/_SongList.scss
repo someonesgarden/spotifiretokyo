@@ -134,6 +134,11 @@ li.user-song-item {
     button{
       margin:2px 0;
       width:120px;
+
+      &.loading{
+        opacity:0.45;
+        pointer-events: none;
+      }
     }
   }
 }

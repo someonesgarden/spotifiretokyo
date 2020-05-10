@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import axios from 'axios'
 import { takeLatest, put} from 'redux-saga/dist/redux-saga-effects-npm-proxy.esm'
 import uniqBy from "lodash/uniqBy";
@@ -7,7 +9,6 @@ export default function* spotifyWatcher() {
     yield takeLatest('SAGA_FETCH_NEW_RELEASES', fetchNewReleases);
     yield takeLatest('SAGA_FETCH_FEATURED', fetchFeatured);
 }
-
 
 
 function* fetchCategories(action){

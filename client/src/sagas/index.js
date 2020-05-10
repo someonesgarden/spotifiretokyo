@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import {all, put} from 'redux-saga/effects';
 
 import albumWatcher from './watchers/spotify/album';
@@ -12,7 +14,6 @@ import musixMatchWatcher from './watchers/lyrics/musixmatch';
 import kgetWatcher from './watchers/lyrics/kget';
 
 export default function* rootSaga() {
-
     try {
         yield all([
             albumWatcher(),
@@ -26,7 +27,6 @@ export default function* rootSaga() {
             kgetWatcher()
         ]);
     } catch (error) {
-        yield put({type:'ASN_FAILED_LOGONLY', value:error})
+        yield put({type: 'ASN_FAILED_LOGONLY', value: error})
     }
-
 }

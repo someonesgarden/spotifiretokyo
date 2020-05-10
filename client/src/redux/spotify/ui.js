@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const ActionType = {
   UPDATE_HEADER_TITLE:'UPDATE_HEADER_TITLE'
 };

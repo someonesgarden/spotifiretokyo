@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const ActionType = {
 	SAGA_MB_GET_TRACK_ISRC:'SAGA_MB_GET_TRACK_ISRC',
 	MB_GET_TRACK_ISRC_OK:'MB_GET_TRACK_ISRC_OK'

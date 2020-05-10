@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import SongControls from "./component";
 import { connect } from "react-redux";
 

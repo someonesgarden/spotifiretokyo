@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import axios from 'axios'
 import { takeLatest, put} from 'redux-saga/dist/redux-saga-effects-npm-proxy.esm'
 import siteStore from "../../../redux/site/index";
@@ -21,3 +23,4 @@ function* kgGetLyrics(action) {
         }).catch(err => err.response)
     yield put({type:'KGET_LYRICS_OK',value:{isrc:isrc,...result}})
 }
+

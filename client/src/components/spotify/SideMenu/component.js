@@ -1,5 +1,6 @@
+/* eslint-disable */
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import TrackSearch from '../TrackSearch';
 
 const SideMenu = ({
@@ -25,6 +26,12 @@ const SideMenu = ({
     updateHeaderTitle('Browse');
     updateViewType('Featured');
     fetchFeatured(access_token);
+  };
+
+  const handlePresaveClick = () => {
+    updateHeaderTitle('PreSave');
+    updateViewType('Pre-Save');
+    //fetchFeatured(access_token);
   };
 
   const renderSideMenu = () => {
@@ -67,7 +74,7 @@ const SideMenu = ({
       <TrackSearch/>
       <ul className='side-menu-container'>
         <li onClick={ handleBrowseClick } className={title === 'Browse' ? 'active side-menu-item': 'side-menu-item'}>Browse</li>
-        {/*<li className='side-menu-item radio'>Radio</li>*/}
+        <li onClick={ handlePresaveClick }  className='side-menu-item radio'>Pre-Save</li>
         <li className='side-menu-item bottom20'></li>
         <h3 className='user-library-header'>Your Library</h3>
         {

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import axios from 'axios';
 import tokenStore from "../../redux/spotify/token";
 import siteStore from "../../redux/site/index";
@@ -59,6 +61,8 @@ export default {
             //refresh_tokenがある場合
             axios.get(`${BASE_URL}/spotify/auth/refreshAccessToken?mode=${MODE}&refresh_token=${stored_refresh_token}`).then(res => {
                 localStorage.setItem('expires_in', res.data.expires_in);
+                const expires_time = new Date().getTime() + res.data.expires_in*1000;
+                localStorage.setItem('expires_time',expires_time+"");
                 localStorage.setItem('access_token', res.data.access_token);
                 callback(null, res.data.access_token);
             }).catch(err => {
@@ -71,6 +75,8 @@ export default {
             axios.get(`${BASE_URL}/spotify/auth/authorizationCodeGrant?mode=${MODE}&code=${code}`).then(res => {
                 let data = res.data.body ? res.data.body : res.data;
                 localStorage.setItem('expires_in',   data.expires_in);
+                const expires_time = new Date().getTime() + res.data.expires_in*1000;
+                localStorage.setItem('expires_time',expires_time+"");
                 localStorage.setItem('access_token', data.access_token);
                 if(data.refresh_token) localStorage.setItem('refresh_token',data.refresh_token);
                 callback(null, data.access_token);

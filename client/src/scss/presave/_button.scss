@@ -1,0 +1,32 @@
+.presave_btn{
+  width:100%;
+  height:100vh;
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  button.btn{
+    background-color: #e71683;
+    //background-color:#2fbc59;
+    color:white;
+    border-radius:20px;
+    padding:6px 18px;
+    text-transform:inherit;
+
+    i.fa{
+      margin-right:0.5rem;
+    }
+
+    &.saved{
+      background-color: #01c367;
+    }
+
+    &.expired{
+      background-color:#e71683;
+    }
+
+    &.ready{
+      background-color: #0091c3;
+    }
+  }
+}
