@@ -8,12 +8,12 @@ export const ActionType = {
 const store = {
     site: {
         //ローカル実験の時はこっち。(client内でnpm run start)
-        mode: "DEV",
-        base_url: 'http://localhost:3030',
+        // mode: "DEV",
+        // base_url: 'http://localhost:3030',
 
         //GCDで本番の時はこっち。
-        // mode:"PROD",
-        // base_url :'https://www.spotifire.tokyo',
+        mode:"PROD",
+        base_url :'https://www.spotifire.tokyo',
         auth: {
             main: {id: 'brain', pw: 'brainbrain', matched: false},
 
