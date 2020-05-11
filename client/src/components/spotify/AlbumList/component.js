@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const AlbumList = ({ songs, audioControl }) => {
+const AlbumList = ({access_token, songs, audioControl,albumGetAlbum}) => {
 
   let id = 0;
 
@@ -10,7 +10,7 @@ const AlbumList = ({ songs, audioControl }) => {
     return songs.map((song, i) => {
       return (
         <li
-          onClick={() => { audioControl(song); } }
+          onClick={() => { albumGetAlbum(access_token, song.track.album); } }
           className='album-item'
           key={ i }
         >

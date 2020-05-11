@@ -22,7 +22,7 @@ let http = require('http').Server(app);
 
 
 //*-------------------------------  REDIS
-// const redis = require('redis');
+const redis = require('redis');
 // const redisClient = redis.createClient({
 //     host: keys.redisHost,
 //     port: keys.redisPort,

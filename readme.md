@@ -116,3 +116,6 @@ mode="DEV"にする。
  modeを"PROD"にする。
  
 
+###No-SQLデータベースとしては
+https://cloud.google.com/memorystore?hl=jaを
+使う。Redis

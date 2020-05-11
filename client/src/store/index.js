@@ -31,13 +31,5 @@ const configureStore = (preloadedState) => {
 
 export const store = configureStore();
 
-// export const store = createStore(
-//     tasksReducer,
-//     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-//     applyMiddleware(
-//         sagaMiddleware,
-//         //thunk
-//     )
-// );
 
 sagaMiddleware.run(rootSaga);

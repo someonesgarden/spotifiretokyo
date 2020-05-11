@@ -31,6 +31,7 @@ class PreSaveWidget extends Component {
         this.setState({...params});
 
         commonUtil.c_accessToken((access_token) => {
+
             if (access_token) {
                 this.setState({mode: 'ready'});
                 const headers = {headers: {'Authorization': 'Bearer ' +  access_token}};
@@ -41,12 +42,6 @@ class PreSaveWidget extends Component {
                     }).catch(err=>{
                         this.setState({mode:"expired"})
                 });
-
-
-                // axios.get(`${base_url}/spotify/me`, headers).then(res =>{
-                //         console.log("me!",res);
-                //     }
-                // );
                 return;
             }
             this.setState({mode: 'expired'});
@@ -56,15 +51,17 @@ class PreSaveWidget extends Component {
     clickAction(action) {
         const {id,type,date} = this.state;
 
+        const refresh_token = localStorage.getItem('refresh_token');
+
         switch (action) {
             case 'login':
-                alert("login")
+                alert("準備中です")
                 break;
             case 'presave':
-                alert("Mongo DB をインストールして予約状態を保存できるように。")
+                alert("準備中です")
                 break;
             case 'saved':
-                alert("saved")
+                window.open(`https://open.spotify.com/${type}/${id}`,"_blank")
                 break;
                 default:
                     alert("other")
@@ -100,9 +97,7 @@ class PreSaveWidget extends Component {
             </div>
         )
     }
-
 }
-
 
 
 

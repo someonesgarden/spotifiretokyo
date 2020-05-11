@@ -164,7 +164,7 @@ class LyricsChecker extends Component {
                         mode === 'error' && (
                             <div className="login">
                                 <img src="/images/lyrics_logo.png" onClick={() => this._login()}/>
-                                {/*<Button onClick={() => this._login()} variant="contained" size="large" color="primary">Login</Button>*/}
+                                {/*<Button onClick={() => this._login()} variant="contained" size="large" color="primary">Lyrics  //  Pre-Save</Button>*/}
                             </div>
                         )
                     }

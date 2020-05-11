@@ -10,6 +10,8 @@ const ActionType = {
   SAGA_FETCH_CATEGORIES:'SAGA_FETCH_CATEGORIES',
   SAGA_FETCH_NEW_RELEASES:'SAGA_FETCH_NEW_RELEASES',
   SAGA_FETCH_FEATURED:'SAGA_FETCH_FEATURED',
+  SAGA_FETCH_CAT_PLAYLISTS:'SAGA_FETCH_CAT_PLAYLISTS',
+  FETCH_CAT_PLAYLISTS_SUCCESS:'FETCH_CAT_PLAYLISTS_SUCCESS'
 };
 
 let store = {};
@@ -65,7 +67,16 @@ const reducer = {
       ...payload.state.browseReducer,
       ...store
     }
-  }
+  },
+
+  [ActionType.FETCH_CAT_PLAYLISTS_SUCCESS]:(payload) => {
+    store.view = payload.value.items;
+    store.fetchFeaturedError = false;
+    return {
+      ...payload.state.browseReducer,
+      ...store
+    }
+  },
 };
 
 

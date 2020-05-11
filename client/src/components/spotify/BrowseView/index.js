@@ -14,7 +14,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => ({
   fetchPlaylistSongs:(userId, playlistId, accessToken)=>dispatch({type:ActionType.SAGA_FETCH_PLAYLIST_SONGS,value:{userId, playlistId, accessToken}}),
   updateHeaderTitle:(data)=>dispatch({type:ActionType.UPDATE_HEADER_TITLE,value:data}),
-  addPlaylistItem:(data)=>dispatch({type:ActionType.ADD_PLAYLIST_ITEM,value:data})
+  addPlaylistItem:(data)=>dispatch({type:ActionType.ADD_PLAYLIST_ITEM,value:data}),
+
+  albumGetAlbum:(accessToken,album)=>dispatch({type:ActionType.SAGA_GET_ALBUM,value:{accessToken,album}}),
+  getGenrePlaylists:(accessToken,genre)=>dispatch({type:ActionType.SAGA_FETCH_CAT_PLAYLISTS,value:{accessToken,genre}})
 });
 
 

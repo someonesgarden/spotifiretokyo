@@ -12,6 +12,17 @@ router.get('/', (req,res)=>{
     });
 });
 
+router.get('/:artistId/top-tracks', (req,res)=>{
+    let artistId = req.params.artistId;
+    const options = {
+        country:'US'
+    };
+
+    common.execApi('/v1/artists/' + artistId + '/top-tracks', 'get', options, req,(result)=>{
+        res.send(result);
+    });
+});
+
 router.get('/:artistId', (req,res)=>{
     let artistId = req.params.artistId;
     common.execApi('/v1/artists/' + artistId, 'get',null, req,(result)=>{
@@ -29,18 +40,13 @@ router.get('/:artistId/albums', (req,res)=>{
 
 router.get('/:albumId/tracks', (req,res)=>{
     let albumId = req.params.albumId;
-    common.execApi('/v1/albums/' + albumId + '/tracks', 'get',null, req,(result)=>{
+    common.execApi('/v1/albums/' + encodeURIComponent(albumId) + '/tracks', 'get',null, req,(result)=>{
         res.send(result);
     });
 });
 
 
-router.get('/:artistId/top-tracks', (req,res)=>{
-    let artistId = req.params.artistId;
-    common.execApi('/v1/artists/' + artistId + '/top-tracks', 'get',null, req,(result)=>{
-        res.send(result);
-    });
-});
+
 
 
 router.get('/:artistId/related-artists', (req,res)=>{

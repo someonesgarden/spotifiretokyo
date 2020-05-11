@@ -132,7 +132,6 @@ class SongList extends Component {
                                     {
                                         mbtracks[isrc] && (
                                             <React.Fragment>
-
                                                 {
                                                     !mmlyrics[isrc] && mbtracks[isrc].length > 0 &&
                                                     <Button variant="contained"

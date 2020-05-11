@@ -49,6 +49,8 @@ const reducer = {
     }
 };
 
+export const BASE_URL = store.site.base_url;
+
 export default {
     store: store,
     reducer: reducer,

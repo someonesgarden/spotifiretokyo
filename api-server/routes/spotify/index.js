@@ -22,7 +22,7 @@ const spotifyApi = keys.spotifyApi;
 //------ ROUTINGS
 router.use('/auth',             authRouter);
 router.use('/me',               meRouter);
-router.use('/usersRouter',      usersRouter);
+router.use('/users',            usersRouter);
 router.use('/tracks',           tracksRouter);
 router.use('/artists',          artistsRouter);
 router.use('/albums',           albumsRouter);

@@ -2,6 +2,7 @@
 
 import axios from 'axios'
 import { takeLatest, put} from 'redux-saga/dist/redux-saga-effects-npm-proxy.esm'
+import {BASE_URL} from '../../../redux/site';
 
 
 export default function* user() {
@@ -13,11 +14,9 @@ export default function* user() {
 
 function* fetchUser(action){
 
-    const result = yield axios.get('https://api.spotify.com/v1/me', {
-        headers: {
-            'Authorization': 'Bearer ' + action.value
-        }
-    }).then(res => res);
+    const headers = {'Authorization': 'Bearer ' + action.value};
+
+    const result = yield axios.get(`${BASE_URL}/spotify/me`, {headers: headers}).then(res => res);
 
     yield put({
         type: 'FETCH_USER_SUCCESS',
@@ -27,12 +26,11 @@ function* fetchUser(action){
 
 function* addSongToLibrary(action){
 
-    const result = yield axios.get(`https://api.spotify.com/v1/me/tracks?ids=${action.value.id}`, {
+    const headers = {'Authorization': 'Bearer ' + action.value.accessToken};
+
+    const result = yield axios.get(`${BASE_URL}/spotify/me/tracks?ids=${action.value.id}`, {
         method: 'PUT',
-        headers: {
-            'Authorization': 'Bearer ' + action.value.accessToken
-        }
-    }).then(res => {
+        headers: headers}).then(res => {
         if(res.data.ok) {
             return action.value.id;
         }

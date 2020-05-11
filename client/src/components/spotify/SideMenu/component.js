@@ -2,6 +2,7 @@
 
 import React from 'react';
 import TrackSearch from '../TrackSearch';
+import commonUtil from '../../../utils/common';
 
 const SideMenu = ({
   updateHeaderTitle,
@@ -25,13 +26,14 @@ const SideMenu = ({
   const handleBrowseClick = ()  => {
     updateHeaderTitle('Browse');
     updateViewType('Featured');
-    fetchFeatured(access_token);
+    commonUtil.c_accessToken((token)=> {
+      fetchFeatured(token);
+    });
   };
 
   const handlePresaveClick = () => {
     updateHeaderTitle('PreSave');
     updateViewType('Pre-Save');
-    //fetchFeatured(access_token);
   };
 
   const renderSideMenu = () => {
@@ -60,8 +62,13 @@ const SideMenu = ({
         <li key={ item.name }
           className={title === item.name ? 'active side-menu-item': 'side-menu-item'}
           onClick={() => {
-            item.getArtists ? item.action(access_token, artistIds) : item.action(access_token);
-            handleClick(item.name); }
+
+            commonUtil.c_accessToken((token)=>{
+              item.getArtists ? item.action(token, artistIds) : item.action(token);
+              handleClick(item.name);
+            })
+
+             }
           }>
           { item.name }
         </li>
@@ -75,7 +82,7 @@ const SideMenu = ({
       <ul className='side-menu-container'>
         <li onClick={ handleBrowseClick } className={title === 'Browse' ? 'active side-menu-item': 'side-menu-item'}>Browse</li>
         <li onClick={ handlePresaveClick }  className='side-menu-item radio'>Pre-Save</li>
-        <li className='side-menu-item bottom20'></li>
+        <li className='side-menu-item bottom20'/>
         <h3 className='user-library-header'>Your Library</h3>
         {
           renderSideMenu()

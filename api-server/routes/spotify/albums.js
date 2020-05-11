@@ -20,4 +20,11 @@ router.get('/:albumId', (req,res)=>{
     });
 });
 
+router.get('/:albumId/tracks', (req,res)=>{
+    let albumId = req.params.albumId;
+    common.execApi('/v1/albums/'+albumId+'/tracks', 'get',null, req,(result)=>{
+        res.send(result);
+    });
+});
+
 module.exports = router;

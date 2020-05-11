@@ -32,13 +32,12 @@ const MainHeader = ({
       return artist.name === headerTitle;
     })[0];
   }
-
   return (
       <div className='section-title'>
         {viewType === 'playlist' && (
             <div className='playlist-title-container'>
               <div className='playlist-image-container'>
-                <img className='playlist-image' src={currentPlaylist.images[0] ? currentPlaylist.images[0].url : null}/>
+                <img className='playlist-image' src={currentPlaylist && currentPlaylist.images[0] ? currentPlaylist.images[0].url : null}/>
               </div>
               <div className='playlist-info-container'>
                 <p className='playlist-text'>PLAYLIST</p>
