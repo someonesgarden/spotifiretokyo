@@ -125,6 +125,11 @@ app.get('/' , function(req, res){
     res.render('index', { title: 'SERVER1', authparams:keys.spotifyParams["emory"]})
 });
 
+
+app.get('/presavewidget' , function(req, res){
+    res.render('index', { title: '', authparams:keys.spotifyParams["emory"]})
+});
+
 app.get('/callback' , function(req, res){
     let access_token = req.query.access_token;
     res.render('index', { title: 'SERVER2', access_token: access_token })
